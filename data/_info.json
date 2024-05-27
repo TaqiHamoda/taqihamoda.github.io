@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Gatsby.js",
+        "url": "https://www.gatsbyjs.com/",
+        "description": "Powered by Gatsby.js"
+    },
+    {
+        "name": "al-folio theme",
+        "url": "https://github.com/alshedivat/al-folio",
+        "description": "Inspired by al-folio theme"
+    },
+    {
+        "name": "repository",
+        "url": "https://github.com/TaqiHamoda/TaqiHamoda.github.io",
+        "description": "Source code repository"
+    }
+]

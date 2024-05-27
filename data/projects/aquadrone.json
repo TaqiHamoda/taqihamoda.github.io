@@ -1,0 +1,7 @@
+{
+    "name": "Aqua Drone",
+    "year": 2020,
+    "description": "Underwater mapping and exploration using a custom built drone. The goal is fully autonomous mapping.",
+    "thumbnail": "../../assets/images/projects/aqua_drone.gif",
+    "link": "https://github.com/TaqiHamoda/aqua_drone"
+}

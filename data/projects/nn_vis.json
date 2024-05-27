@@ -1,0 +1,7 @@
+{
+    "name": "NN Visualizations",
+    "year": 2021,
+    "description": "Visualizing the inner working of Neural Networks using Manim. CSC492 Project.",
+    "thumbnail": "../../assets/images/projects/nn_viz.gif",
+    "link": "https://github.com/TaqiHamoda/CSC492VisualDesignForDeepLearningConcepts"
+}
