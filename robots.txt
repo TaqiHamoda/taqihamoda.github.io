@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://taqihamoda.github.io/sitemap-index.xml
+Host: https://taqihamoda.github.io
