@@ -122,7 +122,7 @@ export default function PageTemplate({ data, children, pageContext }: PageTempla
                     projects
                 </SectionHeader>
 
-                <Carousel marginY={5} itemsPerSlide={[1, 1, 3, 3, 3]} direction={'horizontal'}>
+                <Carousel marginY={5} itemsPerSlide={[1, 1, 2, 3, 3]} direction={'horizontal'}>
                     {data.allProjectsJson.nodes.map((project: any) => (
                         <ProjectCard
                             key={project.name}

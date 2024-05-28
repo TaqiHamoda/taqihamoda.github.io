@@ -11,6 +11,8 @@ import {
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import React, { useState } from 'react';
 
+import SwipableBox from './SwipableBox';
+
 
 interface CarouselProps extends BoxProps {
     children: React.ReactNode[];
@@ -54,7 +56,7 @@ const Carousel: React.FC<CarouselProps> = ({ children, direction = 'horizontal',
     for (let i = 0; i < children.length; i += items) {
         const slideChildren = children.slice(i, i + items);
         while (children.length > items && slideChildren.length < items) {
-            slideChildren.push(<Box key={`slide_box_${i}`} />);
+            slideChildren.push(<Box key={`slide_box_${i + slideChildren.length}`} />);
         }
         slides.push(<Slide key={`slide_${i}`} direction={direction} gap={gap} isVisible={i / items === currentSlide}>{slideChildren}</Slide>);
     }
@@ -65,15 +67,20 @@ const Carousel: React.FC<CarouselProps> = ({ children, direction = 'horizontal',
             {...props}
         >
             {slides.map((slide, index) => (
-                <SlideFade
+                <SwipableBox
                     key={index}
-                    in={index === currentSlide}
-                    offsetY={direction === 'vertical' ? 20 : 0}
-                    offsetX={direction === 'horizontal' ? 20 : 0}
-                    transition={{ enter: { duration: 0.75 }, exit: { duration: 0 } }}
+                    onSwipeLeft={handlePrevClick}
+                    onSwipeRight={handleNextClick}
                 >
-                    {slide}
-                </SlideFade>
+                    <SlideFade
+                        in={index === currentSlide}
+                        offsetY={direction === 'vertical' ? (index < currentSlide ? -20 : 20) : 0}
+                        offsetX={direction === 'horizontal' ? (index < currentSlide ? -20 : 20) : 0}
+                        transition={{ enter: { duration: 1 }, exit: { duration: 0 } }}
+                    >
+                        {slide}
+                    </SlideFade>
+                </SwipableBox>
             ))}
 
             <IconButton
