@@ -1,6 +1,7 @@
 import type { GatsbyConfig } from "gatsby";
 
 const config: GatsbyConfig = {
+  pathPrefix: '/',
   siteMetadata: {
     siteUrl: `https://taqihamoda.github.io/`,
   },

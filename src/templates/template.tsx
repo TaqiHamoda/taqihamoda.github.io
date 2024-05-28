@@ -136,7 +136,6 @@ export default function PageTemplate({ data, children, pageContext }: PageTempla
 
                 {/* Publications Section */}
                 <SectionHeader
-                    marginTop={5}
                     subtext="feel free to reach out with any questions or concerns"
                 >
                     publications

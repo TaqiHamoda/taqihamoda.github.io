@@ -19,9 +19,9 @@ interface CarouselProps extends BoxProps {
     gap?: number;
 }
 
-const Slide = ({ children, direction, gap }: { children: React.ReactNode[]; direction: 'horizontal' | 'vertical'; gap: number }) => {
+const Slide = ({ children, direction, gap, isVisible }: { children: React.ReactNode[]; direction: 'horizontal' | 'vertical'; gap: number; isVisible: boolean }) => {
     return (
-        <Box marginX={20}>
+        <Box marginX={20} display={isVisible ? 'block' : 'none'}>
             <Grid
                 templateColumns={direction === 'horizontal' ? `repeat(${children.length}, 1fr)` : '1fr'}
                 templateRows={direction === 'vertical' ? `repeat(${children.length}, 1fr)` : '1fr'}
@@ -56,7 +56,7 @@ const Carousel: React.FC<CarouselProps> = ({ children, direction = 'horizontal',
         while (children.length > items && slideChildren.length < items) {
             slideChildren.push(<Box key={`slide_box_${i}`} />);
         }
-        slides.push(<Slide key={`slide_${i}`} direction={direction} gap={gap}>{slideChildren}</Slide>);
+        slides.push(<Slide key={`slide_${i}`} direction={direction} gap={gap} isVisible={i / items === currentSlide}>{slideChildren}</Slide>);
     }
 
     return (
@@ -64,9 +64,17 @@ const Carousel: React.FC<CarouselProps> = ({ children, direction = 'horizontal',
             position="relative"
             {...props}
         >
-            <SlideFade key={currentSlide} in offsetY={direction === 'vertical' ? 20 : 0} offsetX={direction === 'horizontal' ? 20 : 0}>
-                {slides[currentSlide]}
-            </SlideFade>
+            {slides.map((slide, index) => (
+                <SlideFade
+                    key={index}
+                    in={index === currentSlide}
+                    offsetY={direction === 'vertical' ? 20 : 0}
+                    offsetX={direction === 'horizontal' ? 20 : 0}
+                    transition={{ enter: { duration: 0.75 }, exit: { duration: 0 } }}
+                >
+                    {slide}
+                </SlideFade>
+            ))}
 
             <IconButton
                 title='Previous slide'
@@ -75,6 +83,7 @@ const Carousel: React.FC<CarouselProps> = ({ children, direction = 'horizontal',
                 onClick={handlePrevClick}
                 position="absolute"
                 top="50%"
+                transform="translateY(-50%)"
                 left={0}
             />
 
@@ -85,6 +94,7 @@ const Carousel: React.FC<CarouselProps> = ({ children, direction = 'horizontal',
                 onClick={handleNextClick}
                 position="absolute"
                 top="50%"
+                transform="translateY(-50%)"
                 right={0}
             />
 
