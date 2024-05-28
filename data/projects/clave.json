@@ -2,6 +2,6 @@
     "name": "Clave",
     "year": 2022,
     "description": "An open source robot management system. Previously known as O-CTCR.",
-    "thumbnail": "../../assets/images/projects/clave.gif",
+    "image": "../../assets/images/projects/clave.gif",
     "link": "https://github.com/TaqiHamoda/Clave"
 }

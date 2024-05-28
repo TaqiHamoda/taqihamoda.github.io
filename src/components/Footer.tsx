@@ -70,7 +70,7 @@ const Footer = ({ updateDate, firstname, surname, ...props }: FooterProps) => {
                 </Text>
 
                 <Text color='gray.500' fontSize='xs'>
-                    Last updated: {updateDate.toDateString()}
+                    Last updated: {updateDate.toLocaleDateString()}
                 </Text>
 
                 {infos.map((info: any) => (

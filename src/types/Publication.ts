@@ -1,5 +1,5 @@
 import Author from "./Author";
-
+import ImgType from "./ImgType";
 
 export default interface Publication {
     title: string;
@@ -10,7 +10,7 @@ export default interface Publication {
     month: string;
     year: number;
     abstract: string;
-    image: any;
+    image: ImgType;
     arxiv: string;
     pdf: string;
     website: string;

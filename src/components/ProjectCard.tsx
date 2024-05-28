@@ -11,42 +11,42 @@ import {
     useColorModeValue,
 } from '@chakra-ui/react';
 
+import Project from '../types/Project';
+
 import Img from './Img';
 import StrongDivider from './StrongDivider';
 
 
 interface ProjectCardProps extends LinkBoxProps {
-    title: string;
-    description: string;
-    thumbnail: any;
-    link: string;
+    project: Project;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, thumbnail, link, ...props }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, ...props }) => {
     const hoverBg = useColorModeValue('gray.200', 'gray.600');
     const cardBg = useColorModeValue('gray.100', 'gray.700');
 
     return (
         <LinkBox
+            title={project.name}
             as={Card}
             bgColor={cardBg}
             _hover={{ bg: hoverBg, boxShadow: 'lg' }}
             {...props}
         >
             <CardBody>
-                <Img image={thumbnail} alt={title}/>
+                <Img image={project.image} alt={project.name}/>
 
                 <Flex justifyContent={'center'} marginY={2.5}>
                     <Heading as='h2' fontSize="xl" marginTop={2}>
-                        {title}
+                        {project.name}
                     </Heading>
                 </Flex>
 
                 <StrongDivider />
 
-                <LinkOverlay href={link} isExternal>
+                <LinkOverlay href={project.link} isExternal>
                     <Text fontSize="md" marginTop={4}>
-                        {description}
+                        {project.description}
                     </Text>
                 </LinkOverlay>
             </CardBody>

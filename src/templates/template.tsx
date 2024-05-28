@@ -13,9 +13,10 @@ import {
     useBreakpointValue
 } from '@chakra-ui/react'
 
-import Author from "../types/Author"
-import Publication from "../types/Publication"
+import getAllProjects from '../data/getAllProjects';
+import getAllPublications from '../data/getAllPublications';
 
+import SEO from "../components/SEO";
 import Img from "../components/Img"
 import NavBar from "../components/NavBar"
 import Footer from "../components/Footer"
@@ -34,50 +35,10 @@ interface PageTemplateProps {
 }
 
 export default function PageTemplate({ data, children, pageContext }: PageTemplateProps) {
-    const authors: { [key: string]: Author } = {};
-    const publications: Publication[] = [];
+    const projects = getAllProjects();
+    const publications = getAllPublications();
 
     const isSmallScreen = useBreakpointValue({ base: true, md: false });
-
-    data.allAuthorsJson.nodes.forEach((author: Author) => {
-        authors[author.tag] = author;
-    });
-
-    data.allBibliographyJson.nodes.forEach((publication: any) => {
-        const pub_authors: Author[] = [];
-
-        publication.authors.forEach((author: string) => {
-            if (authors[author] != null) {
-                pub_authors.push(authors[author]);
-            } else {
-                pub_authors.push({
-                    name: author,
-                    website: "",
-                    tag: ""
-                })
-            }
-        });
-
-        const pub_date = new Date(publication.published);
-
-        publications.push({
-            title: publication.title,
-            published: pub_date,
-            journal: publication.journal,
-            doi: publication.doi,
-            authors: pub_authors,
-            month: pub_date.toLocaleString('en-US', { month: 'long' }),
-            year: pub_date.getFullYear(),
-            abstract: publication.abstract,
-            image: publication.preview,
-            arxiv: publication.arxiv,
-            pdf: publication.pdf.publicURL,
-            url: publication.url,
-            website: publication.website,
-            bibtex: publication.bibtex,
-            tags: publication.tags
-        })
-    });
 
     return (
         <VStack alignItems={'center'}>
@@ -123,13 +84,10 @@ export default function PageTemplate({ data, children, pageContext }: PageTempla
                 </SectionHeader>
 
                 <Carousel marginY={5} itemsPerSlide={[1, 1, 2, 3, 3]} direction={'horizontal'}>
-                    {data.allProjectsJson.nodes.map((project: any) => (
+                    {projects.map(project => (
                         <ProjectCard
                             key={project.name}
-                            title={project.name}
-                            description={project.description}
-                            thumbnail={project.thumbnail}
-                            link={project.link}
+                            project={project}
                         />
                     ))}
                 </Carousel>
@@ -147,7 +105,7 @@ export default function PageTemplate({ data, children, pageContext }: PageTempla
             <Footer
                 firstname={pageContext.frontmatter.firstname}
                 surname={pageContext.frontmatter.surname}
-                updateDate={new Date(pageContext.updateDate)}
+                updateDate={new Date(data.siteBuildMetadata.buildTime)}
             />
         </VStack>
     );
@@ -165,61 +123,19 @@ query($id: String!) {
         }
       }
     }
-    allProjectsJson(sort: {year: DESC}) {
-        nodes {
-            link
-            name
-            thumbnail {
-                publicURL
-                childImageSharp {
-                    gatsbyImageData
-                }
-            }
-            year
-            description
-        }
-    }
-    allBibliographyJson(sort: {published: DESC}) {
-        nodes {
-            abstract
-            arxiv
-            authors
-            bibtex
-            doi
-            journal
-            pdf {
-                publicURL
-            }
-            published
-            publisher
-            title
-            url
-            website
-            tags
-            preview {
-                publicURL
-                childImageSharp {
-                    gatsbyImageData
-                }
-            }
-        }
-    }
-    allAuthorsJson {
-        nodes {
-            name
-            tag
-            website
-        }
+    siteBuildMetadata {
+        buildTime
     }
 }`;
 
 
 export function Head({ location, params, data, pageContext }: any) {
     return (
-        <>
-            <html lang="en" />
-            <title>{pageContext.frontmatter.title}</title>
-            <meta name="description" content={pageContext.frontmatter.description} />
-        </>
+        <SEO
+        title={pageContext.frontmatter.title}
+        description={pageContext.frontmatter.description}
+        image={data.mdx.frontmatter.profile_image.publicURL}
+        pathname={location.pathname}
+        />
     );
 }

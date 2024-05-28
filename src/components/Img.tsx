@@ -10,24 +10,10 @@ import {
     useDisclosure,
 } from '@chakra-ui/react';
 
+import ImgType from '../types/ImgType';
 
 interface _ImgProps extends BoxProps {
-    image: {
-        publicURL: string,
-        childImageSharp: null | {
-            gatsbyImageData: {
-                placeholder: {
-                    fallback: string
-                },
-                images: {
-                    fallback: {
-                        src: string,
-                        srcSet: string
-                    },
-                }
-            }
-        }
-    },
+    image: ImgType,
     alt: string,
 }
 
