@@ -53,11 +53,16 @@ export default function PageTemplate({ data, children, pageContext }: PageTempla
                 </Box>
 
                 <Box>
-                    <Box float={"right"} marginLeft={isSmallScreen ? 0 : 5}>
+                    <Box
+                        float={"right"}
+                        width='full'
+                        maxWidth={isSmallScreen ? 'full' : '360px'}
+                        marginLeft={isSmallScreen ? 0 : 5}
+                    >
                         <Img
                             preload
                             maxQuality={640}
-                            maxWidth={isSmallScreen ? 'full' : '360px'}
+                            width='full'
                             image={data.mdx.frontmatter.profile_image}
                             alt={"Profile Picture"}
                         />
@@ -79,7 +84,7 @@ export default function PageTemplate({ data, children, pageContext }: PageTempla
                 </Box>
 
                 {/* Projects Section */}
-                <OptimalBox delay>
+                <OptimalBox delay width='full'>
                     <SectionHeader
                         marginTop={5}
                         subtext="projects am proud to be a part of :)"
