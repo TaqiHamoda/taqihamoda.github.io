@@ -10,7 +10,6 @@ import {
 
 import Publication from '../types/Publication';
 
-import OptimalBox from './OptimalBox';
 import PublicationCard from './PublicationCard';
 
 
@@ -32,7 +31,7 @@ const PublicationsList = ({ publications, ...props }: PublicationsListProps) => 
     });
 
     return (
-        <OptimalBox width="100%" {...props}>
+        <Box width="100%" {...props}>
             {Object.keys(groupedPublications).sort((a: any, b: any) => b - a).map((year: any) => (
                 <Box key={year}>
                     <Flex justifyContent="flex-end">
@@ -48,7 +47,7 @@ const PublicationsList = ({ publications, ...props }: PublicationsListProps) => 
                     </SimpleGrid>
                 </Box>
             ))}
-        </OptimalBox>
+        </Box>
     );
 };
 

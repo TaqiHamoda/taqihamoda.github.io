@@ -17,13 +17,14 @@ import getAllProjects from '../data/getAllProjects';
 import getAllPublications from '../data/getAllPublications';
 
 import SEO from "../components/SEO";
-import Img from "../components/Img"
-import NavBar from "../components/NavBar"
-import Footer from "../components/Footer"
-import Carousel from "../components/Carousel"
-import ProjectCard from "../components/ProjectCard"
-import SectionHeader from "../components/SectionHeader"
-import PublicationsList from "../components/PublicationList"
+import Img from "../components/Img";
+import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
+import Carousel from "../components/Carousel";
+import OptimalBox from "../components/OptimalBox";
+import ProjectCard from "../components/ProjectCard";
+import SectionHeader from "../components/SectionHeader";
+import PublicationsList from "../components/PublicationList";
 
 
 const shortcodes = { Link, Text, Heading, Flex, Spacer, HStack, VStack } // Provide common components here
@@ -78,30 +79,34 @@ export default function PageTemplate({ data, children, pageContext }: PageTempla
                 </Box>
 
                 {/* Projects Section */}
-                <SectionHeader
-                    marginTop={5}
-                    subtext="projects am proud to be a part of :)"
-                >
-                    projects
-                </SectionHeader>
+                <OptimalBox delay>
+                    <SectionHeader
+                        marginTop={5}
+                        subtext="projects am proud to be a part of :)"
+                    >
+                        projects
+                    </SectionHeader>
 
-                <Carousel marginY={5} itemsPerSlide={[1, 1, 2, 3, 3]} direction={'horizontal'}>
-                    {projects.map(project => (
-                        <ProjectCard
-                            key={project.name}
-                            project={project}
-                        />
-                    ))}
-                </Carousel>
+                    <Carousel marginY={5} itemsPerSlide={[1, 1, 2, 3, 3]} direction={'horizontal'}>
+                        {projects.map(project => (
+                            <ProjectCard
+                                key={project.name}
+                                project={project}
+                            />
+                        ))}
+                    </Carousel>
+                </OptimalBox>
 
                 {/* Publications Section */}
-                <SectionHeader
-                    subtext="feel free to reach out with any questions or concerns"
-                >
-                    publications
-                </SectionHeader>
+                <OptimalBox delay width='full'>
+                    <SectionHeader
+                        subtext="feel free to reach out with any questions or concerns"
+                    >
+                        publications
+                    </SectionHeader>
 
-                <PublicationsList marginBottom={5} publications={publications} />
+                    <PublicationsList marginBottom={5} publications={publications} />
+                </OptimalBox>
             </VStack>
 
             <Footer
