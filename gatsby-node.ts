@@ -17,7 +17,7 @@ exports.createPages = async ({
     // taqi hamoda: تقي حموده
     // last update: أخر تحديث
     // source code repository: مصدر أصل الموقع
-    // inspired by al-folio theme: مشروع الفوليو ألهم تصميم الموقع
+    // inspired by al-folio theme: تصميم الموقع مستوحى من مشروع الفوليو
     // powered by Gatsby: مبني على جتسبي
 
     const result = await graphql(`

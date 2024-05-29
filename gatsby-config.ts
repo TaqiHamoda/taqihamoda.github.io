@@ -9,6 +9,7 @@ const config: GatsbyConfig = {
         description: "Welcome to my website!",
         twitterUsername: "",
         siteUrl: siteUrl,
+        favicon: '🌱',  // Uncomment the manifest plugin to use a file
     },
     plugins: [
         `gatsby-plugin-mdx`,
@@ -50,10 +51,10 @@ const config: GatsbyConfig = {
             options: {
                 // Documentation: https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-plugin-image/
                 defaults: {
-                    formats: [`auto`, `webp`],
+                    formats: [`webp`],
                     placeholder: `blurred`,
-                    quality: 50,
-                    breakpoints: [750, 1080, 1366, 1920],
+                    quality: 25,
+                    breakpoints: [360, 480, 640, 720],
                     backgroundColor: `transparent`,
                     blurredOptions: {},
                     jpgOptions: {},
@@ -78,12 +79,12 @@ const config: GatsbyConfig = {
                 },
             },
         },
-        {
-            resolve: `gatsby-plugin-manifest`,
-            options: {
-                icon: `${__dirname}/assets/favicon.svg`,  // You can edit the svg file to use an emoji for the icon
-            },
-        },
+        // {
+        //     resolve: `gatsby-plugin-manifest`,
+        //     options: {
+        //         icon: `${__dirname}/assets/favicon.svg`,  // You can edit the svg file to use an emoji for the icon
+        //     },
+        // },
         {
             resolve: `gatsby-source-filesystem`,
             options: {

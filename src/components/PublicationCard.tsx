@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-    Box,
     Flex,
     Heading,
     Link,
@@ -12,6 +11,7 @@ import {
     Button,
     Tag,
     Wrap,
+    WrapItem,
     Spacer,
     useBreakpointValue
 } from '@chakra-ui/react';
@@ -89,9 +89,11 @@ const PublicationCard = ({ publication, ...props }: PublicationCardProps) => {
 
                             <Wrap marginTop={2} gridGap={3}>
                                 {publication.tags.map((tag, index) => (
-                                    <Tag key={index} size="md" colorScheme='blue'>
-                                        {tag}
-                                    </Tag>
+                                    <WrapItem key={index}>
+                                        <Tag size="md" colorScheme='blue'>
+                                            {tag}
+                                        </Tag>
+                                    </WrapItem>
                                 ))}
                             </Wrap>
 
@@ -105,10 +107,10 @@ const PublicationCard = ({ publication, ...props }: PublicationCardProps) => {
                                 ))}
                                 {publication.bibtex && (
                                     <Button
-                                    size="sm"
-                                    variant="outline"
-                                    colorScheme={showBibtex ? 'teal' : 'gray'}
-                                    onClick={() => setShowBibtex(!showBibtex)}>
+                                        size="sm"
+                                        variant="outline"
+                                        colorScheme={showBibtex ? 'teal' : 'gray'}
+                                        onClick={() => setShowBibtex(!showBibtex)}>
                                         BibTeX
                                     </Button>
                                 )}
