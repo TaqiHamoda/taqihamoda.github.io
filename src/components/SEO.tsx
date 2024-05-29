@@ -12,20 +12,16 @@ interface SEOProps {
     isLocalImage?: boolean;
 };
 
-const SEO = ({ title, description, path, image = '', isLocalImage=false, children }: SEOProps) => {
+const SEO = ({ title, description, path, image = '', isLocalImage = false, children }: SEOProps) => {
     const siteMetadata = getSiteMetadata();
 
     const seo = {
         title: title || siteMetadata.title,
         description: description || siteMetadata.description,
         url: path ? `${siteMetadata.siteUrl}/${path}` : siteMetadata.siteUrl,
-        image: image,
+        image: isLocalImage && image ? `${siteMetadata.siteUrl}${image}` : image,
         favicon: siteMetadata.favicon,
     };
-
-    if(isLocalImage && image) {
-        seo.image = `${siteMetadata.siteUrl}${seo.image}`
-    }
 
     return (
         <>

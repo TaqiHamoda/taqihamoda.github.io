@@ -54,7 +54,9 @@ export default function PageTemplate({ data, children, pageContext }: PageTempla
                 <Box>
                     <Box float={"right"} marginLeft={isSmallScreen ? 0 : 5}>
                         <Img
-                            maxWidth={isSmallScreen ? 'full' : '350px'}
+                            preload
+                            maxQuality={640}
+                            maxWidth={isSmallScreen ? 'full' : '360px'}
                             image={data.mdx.frontmatter.profile_image}
                             alt={"Profile Picture"}
                         />
@@ -117,7 +119,7 @@ query($id: String!) {
         profile_image {
             publicURL
             childImageSharp {
-            gatsbyImageData
+                gatsbyImageData
           }
         }
       }

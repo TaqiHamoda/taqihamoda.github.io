@@ -34,7 +34,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, ...props }) => {
             {...props}
         >
             <CardBody>
-                <Img image={project.image} alt={project.name}/>
+                <Img image={project.image} alt={project.name} maxQuality={480}/>
 
                 <Flex justifyContent={'center'} marginY={2.5}>
                     <Heading as='h2' fontSize="xl" marginTop={2}>

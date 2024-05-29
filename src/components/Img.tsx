@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Image,
     Box,
@@ -8,22 +8,54 @@ import {
     ModalContent,
     ModalBody,
     useDisclosure,
+    useId
 } from '@chakra-ui/react';
 
 import ImgType from '../types/ImgType';
 
-interface _ImgProps extends BoxProps {
-    image: ImgType,
-    alt: string,
+
+interface _ImgProps extends Omit<BoxProps, 'children'> {
+    image: ImgType;
+    alt: string;
+    maxQuality?: number;
+    preload?: boolean;
 }
 
-const _Img: React.FC<_ImgProps> = ({ image, alt, maxWidth, maxHeight, ...props }) => {
+const _Img: React.FC<_ImgProps> = ({ image, alt, maxWidth, maxHeight, maxQuality, preload = false, ...props }) => {
+    const uniqueId = useId();
+    const [isLoaded, setIsLoaded] = useState(false);
+
     const src = image.publicURL;
-    const srcSet = image.childImageSharp ? image.childImageSharp.gatsbyImageData.images.fallback.srcSet : src;
+    let srcSet = image.childImageSharp ? image.childImageSharp.gatsbyImageData.images.fallback.srcSet : src;
     const placeholder = image.childImageSharp ? image.childImageSharp.gatsbyImageData.placeholder.fallback : src;
+
+    // Parse srcSet and filter out sizes that exceed maxWidth
+    if (maxQuality && srcSet !== src) {
+        const srcSetSizes = srcSet.split(',\n');
+        const filteredSrcSetSizes = srcSetSizes.filter(size => {
+            const width = parseInt(size.split(' ')[1].replace('w', ''));
+            return width <= maxQuality;
+        });
+        srcSet = filteredSrcSetSizes.length > 0 ? filteredSrcSetSizes.join(', ') : srcSetSizes[0];
+    }
+
+    // Lazy loading for the images, only show images when in user view
+    useEffect(() => {
+        const handleScroll = () => {
+            const imgElement = document.getElementById(uniqueId);
+            if (imgElement && imgElement.getBoundingClientRect().top < window.innerHeight) {
+                setIsLoaded(true);
+            }
+        };
+
+        handleScroll();
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [uniqueId]);
 
     return (
         <Box
+            id={uniqueId}
             bgColor='black'
             maxWidth={maxWidth}
             maxHeight={maxHeight}
@@ -31,7 +63,9 @@ const _Img: React.FC<_ImgProps> = ({ image, alt, maxWidth, maxHeight, ...props }
             justifyContent='center'
             alignItems='center'
             {...props}>
-            <Image
+            {isLoaded && <Image
+                rel={preload ? 'preload' : undefined}
+                fetchPriority={preload ? 'high' : undefined}
                 srcSet={srcSet}
                 maxWidth={maxWidth}
                 maxHeight={maxHeight}
@@ -41,7 +75,7 @@ const _Img: React.FC<_ImgProps> = ({ image, alt, maxWidth, maxHeight, ...props }
                 width='100%'
                 height='100%'
                 objectFit='contain'
-            />
+            />}
         </Box>
     );
 };

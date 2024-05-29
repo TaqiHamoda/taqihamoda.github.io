@@ -53,7 +53,7 @@ const config: GatsbyConfig = {
                     formats: [`webp`],
                     placeholder: `blurred`,
                     quality: 25,
-                    breakpoints: [360, 480, 640, 720],
+                    breakpoints: [480, 640, 720, 1080],
                     backgroundColor: `transparent`,
                     blurredOptions: {},
                     jpgOptions: {},
