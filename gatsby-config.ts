@@ -7,7 +7,6 @@ const config: GatsbyConfig = {
     siteMetadata: {  // Default Metadata if data isn't specified on the content page
         title: "My own personal website",
         description: "Welcome to my website!",
-        twitterUsername: "",
         siteUrl: siteUrl,
         favicon: '🌱',  // Uncomment the manifest plugin to use a file
     },

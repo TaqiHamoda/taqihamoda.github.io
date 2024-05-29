@@ -11,7 +11,6 @@ export default function getSiteMetadata(): SiteMedata {
                     favicon
                     siteUrl
                     title
-                    twitterUsername
                 }
             }
         }

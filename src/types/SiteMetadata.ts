@@ -3,5 +3,4 @@ export default interface SiteMedata {
     description: string;
     siteUrl: string;
     favicon: string;
-    twitterUsername: string;
-}
+};
