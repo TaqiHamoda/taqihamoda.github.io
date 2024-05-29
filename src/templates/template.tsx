@@ -128,6 +128,7 @@ query($id: String!) {
 export function Head({ location, params, data, pageContext }: any) {
     return (
         <SEO
+            isLocalImage
             title={pageContext.frontmatter.title}
             description={pageContext.frontmatter.description}
             image={data.mdx.frontmatter.profile_image.publicURL}
