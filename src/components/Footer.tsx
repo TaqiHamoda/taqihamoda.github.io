@@ -6,43 +6,23 @@ import {
     Text,
     Flex,
 } from '@chakra-ui/react';
-import { useStaticQuery, graphql } from 'gatsby';
+
+import getAllSocials from '../data/getAllSocials';
+import getAllInfo from '../data/getAllInfo';
+import getSiteBuildTime from '../data/getSiteBuildTime';
 
 import SVGIcon from './SVGIcon';
 
 
 interface FooterProps extends BoxProps {
-    updateDate: Date;
     firstname: string;
     surname: string;
 }
 
-const Footer = ({ updateDate, firstname, surname, ...props }: FooterProps) => {
-    const year = updateDate.getFullYear();
-
-    const data = useStaticQuery(graphql`
-        query {
-            allInfoJson {
-                nodes {
-                    name
-                    url
-                    description
-                }
-            }
-            allSocialsJson {
-                nodes {
-                    name
-                    url
-                    icon {
-                        publicURL
-                    }
-                }
-            }
-        }
-    `);
-
-    const infos = data.allInfoJson.nodes;
-    const socials = data.allSocialsJson.nodes;
+const Footer = ({ firstname, surname, ...props }: FooterProps) => {
+    const infos = getAllInfo();
+    const socials = getAllSocials();
+    const updateDate = getSiteBuildTime();
 
     return (
         <Box as="footer" width="100%" padding={5} {...props}>
@@ -66,7 +46,7 @@ const Footer = ({ updateDate, firstname, surname, ...props }: FooterProps) => {
 
             <Flex gap={3} width='100%' justifyContent='center'>
                 <Text color='gray.500' fontSize='xs'>
-                    &copy; {year} {firstname} {surname}
+                    &copy; {updateDate.getFullYear()} {firstname} {surname}
                 </Text>
 
                 <Text color='gray.500' fontSize='xs'>

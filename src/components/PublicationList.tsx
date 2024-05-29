@@ -22,11 +22,12 @@ const PublicationsList = ({ publications, ...props }: PublicationsListProps) => 
     const groupedPublications: { [key: number]: Publication[] } = {};
 
     publications.forEach(publication => {
-        if (!groupedPublications[publication.year]) {
-            groupedPublications[publication.year] = [];
+        const publicationYear = new Date(publication.published).getFullYear();
+        if (!groupedPublications[publicationYear]) {
+            groupedPublications[publicationYear] = [];
         }
 
-        groupedPublications[publication.year].push(publication);
+        groupedPublications[publicationYear].push(publication);
     });
 
     return (

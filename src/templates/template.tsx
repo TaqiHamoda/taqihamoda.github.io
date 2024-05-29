@@ -105,7 +105,6 @@ export default function PageTemplate({ data, children, pageContext }: PageTempla
             <Footer
                 firstname={pageContext.frontmatter.firstname}
                 surname={pageContext.frontmatter.surname}
-                updateDate={new Date(data.siteBuildMetadata.buildTime)}
             />
         </VStack>
     );
@@ -123,39 +122,16 @@ query($id: String!) {
         }
       }
     }
-    site {
-        siteMetadata {
-            description
-            favicon
-            siteUrl
-            title
-            twitterUsername
-        }
-    }
-    siteBuildMetadata {
-        buildTime
-    }
 }`;
 
 
 export function Head({ location, params, data, pageContext }: any) {
-    const seo = {
-        title: pageContext.frontmatter.title || data.site.siteMetadata.title,
-        description: pageContext.frontmatter.description || data.site.siteMetadata.description,
-        url: `${data.site.siteMetadata.siteUrl}/${location.pathname}`,
-        favicon: data.site.siteMetadata.favicon,
-        image: data.mdx.frontmatter.profile_image.publicURL,
-        twitterUsername: data.site.siteMetadata.twitterUsername
-    };
-
     return (
         <SEO
-            title={seo.title}
-            description={seo.description}
-            image={seo.image}
-            url={seo.url}
-            favicon={seo.favicon}
-            twitterUsername={seo.twitterUsername}
+            title={pageContext.frontmatter.title}
+            description={pageContext.frontmatter.description}
+            image={data.mdx.frontmatter.profile_image.publicURL}
+            path={location.pathname}
         />
     );
 }

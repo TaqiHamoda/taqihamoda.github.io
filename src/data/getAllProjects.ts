@@ -2,9 +2,7 @@ import { useStaticQuery, graphql } from "gatsby";
 
 import Project from "../types/Project";
 
-export default function getAllProjects() {
-    const projects: Project[] = [];
-
+export default function getAllProjects(): Project[] {
     const data = useStaticQuery(graphql`
     query {
         allProjectsJson(sort: {year: DESC}) {
@@ -23,9 +21,5 @@ export default function getAllProjects() {
         }
     }`);
 
-    data.allProjectsJson.nodes.forEach((project: Project) => {
-        projects.push(project);
-    });
-
-    return projects;
+    return data.allProjectsJson.nodes;
 }

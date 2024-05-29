@@ -55,16 +55,12 @@ export default function getAllPublications() {
             }
         });
 
-        const pub_date = new Date(publication.published);
-
         publications.push({
             title: publication.title,
-            published: pub_date,
+            published: publication.published,
             journal: publication.journal,
             doi: publication.doi,
             authors: pub_authors,
-            month: pub_date.toLocaleString("en-US", { month: "long" }),
-            year: pub_date.getFullYear(),
             abstract: publication.abstract,
             image: publication.preview,
             arxiv: publication.arxiv,

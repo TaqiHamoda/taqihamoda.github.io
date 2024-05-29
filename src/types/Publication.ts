@@ -3,12 +3,10 @@ import ImgType from "./ImgType";
 
 export default interface Publication {
     title: string;
-    published: Date;
+    published: string;
     journal: string;
     doi: string;
     authors: Author[];
-    month: string;
-    year: number;
     abstract: string;
     image: ImgType;
     arxiv: string;

@@ -18,7 +18,7 @@ exports.createPages = async ({
     // last update: أخر تحديث
     // source code repository: مصدر أصل الموقع
     // inspired by al-folio theme: تصميم الموقع مستوحى من مشروع الفوليو
-    // powered by Gatsby: مبني على جتسبي
+    // powered by Gatsby: مبني بجتسبي
 
     const result = await graphql(`
         query {

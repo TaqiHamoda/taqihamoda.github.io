@@ -55,6 +55,9 @@ const PublicationCard = ({ publication, ...props }: PublicationCardProps) => {
         { label: 'WEBSITE', href: publication.website },
     ].filter(link => link.href);
 
+    const publishedDate = new Date(publication.published);
+    const publishedMonth = publishedDate.toLocaleString('en-US', { month: 'long' });
+
     return (
         <Card variant="outline" {...props}>
             <CardBody>
@@ -81,8 +84,8 @@ const PublicationCard = ({ publication, ...props }: PublicationCardProps) => {
                                 {authors}
                             </Text>
                             <Text>
-                                <i>{publication.journal}</i>, <i>{publication.doi}</i>, {publication.month}{' '}
-                                {publication.year}
+                                <i>{publication.journal}</i>, <i>{publication.doi}</i>, {publishedMonth}{' '}
+                                {publishedDate.getFullYear()}
                             </Text>
 
                             <Spacer />
