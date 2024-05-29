@@ -11,6 +11,7 @@ import {
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import React, { useState } from 'react';
 
+import OptimalBox from './OptimalBox';
 import SwipableBox from './SwipableBox';
 
 
@@ -62,7 +63,7 @@ const Carousel: React.FC<CarouselProps> = ({ children, direction = 'horizontal',
     }
 
     return (
-        <Box
+        <OptimalBox
             position="relative"
             {...props}
         >
@@ -120,7 +121,7 @@ const Carousel: React.FC<CarouselProps> = ({ children, direction = 'horizontal',
                     />
                 ))}
             </Box>
-        </Box>
+        </OptimalBox>
     );
 };
 

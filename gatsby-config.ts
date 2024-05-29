@@ -4,11 +4,12 @@ const siteUrl = `https://taqihamoda.github.io/`;
 
 const config: GatsbyConfig = {
     pathPrefix: "/",
-    siteMetadata: {  // Default Metadata if data isn't specified on the content page
+    siteMetadata: {
+        // Default Metadata if data isn't specified on the content page
         title: "My own personal website",
         description: "Welcome to my website!",
         siteUrl: siteUrl,
-        favicon: '🌱',  // Uncomment the manifest plugin to use a file
+        favicon: "🌱", // Uncomment the manifest plugin to use a file
     },
     plugins: [
         `gatsby-plugin-mdx`,
@@ -53,7 +54,7 @@ const config: GatsbyConfig = {
                     formats: [`webp`],
                     placeholder: `blurred`,
                     quality: 25,
-                    breakpoints: [480, 640, 720, 1080],
+                    breakpoints: [360, 480, 640, 720, 1080],
                     backgroundColor: `transparent`,
                     blurredOptions: {},
                     jpgOptions: {},
@@ -103,6 +104,14 @@ const config: GatsbyConfig = {
             options: {
                 name: `data`,
                 path: `${__dirname}/data`,
+            },
+        },
+        {
+            resolve: "gatsby-plugin-webpack-bundle-analyser-v2",
+            options: {
+                devMode: false,
+                analyzerMode: "server",
+                analyzerPort: 3001,
             },
         },
     ],

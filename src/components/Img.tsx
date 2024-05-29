@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import {
     Image,
-    Box,
     BoxProps,
     Modal,
     ModalOverlay,
     ModalContent,
     ModalBody,
     useDisclosure,
-    useId
 } from '@chakra-ui/react';
 
 import ImgType from '../types/ImgType';
 
+import OptimalBox from './OptimalBox';
 
 interface _ImgProps extends Omit<BoxProps, 'children'> {
     image: ImgType;
@@ -22,14 +21,14 @@ interface _ImgProps extends Omit<BoxProps, 'children'> {
 }
 
 const _Img: React.FC<_ImgProps> = ({ image, alt, maxWidth, maxHeight, maxQuality, preload = false, ...props }) => {
-    const uniqueId = useId();
-    const [isLoaded, setIsLoaded] = useState(false);
+    const [isHighQualityLoaded, setIsHighQualityLoaded] = useState(false);
 
     const src = image.publicURL;
     let srcSet = image.childImageSharp ? image.childImageSharp.gatsbyImageData.images.fallback.srcSet : src;
     const placeholder = image.childImageSharp ? image.childImageSharp.gatsbyImageData.placeholder.fallback : src;
 
     // Parse srcSet and filter out sizes that exceed maxWidth
+    let lowQualitySrcSet;
     if (maxQuality && srcSet !== src) {
         const srcSetSizes = srcSet.split(',\n');
         const filteredSrcSetSizes = srcSetSizes.filter(size => {
@@ -37,25 +36,24 @@ const _Img: React.FC<_ImgProps> = ({ image, alt, maxWidth, maxHeight, maxQuality
             return width <= maxQuality;
         });
         srcSet = filteredSrcSetSizes.length > 0 ? filteredSrcSetSizes.join(', ') : srcSetSizes[0];
+        lowQualitySrcSet = srcSetSizes[0];
+    } else {
+        lowQualitySrcSet = srcSet;
     }
 
-    // Lazy loading for the images, only show images when in user view
+    // Progressive loading of images. Load the high-quality image when the main thread isn't busy
     useEffect(() => {
-        const handleScroll = () => {
-            const imgElement = document.getElementById(uniqueId);
-            if (imgElement && imgElement.getBoundingClientRect().top < window.innerHeight) {
-                setIsLoaded(true);
-            }
-        };
-
-        handleScroll();
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [uniqueId]);
+        if (!isHighQualityLoaded) {
+            const handleIdle = () => {
+                setIsHighQualityLoaded(true);
+            };
+            window.requestIdleCallback(handleIdle);
+        }
+    }, [isHighQualityLoaded]);
 
     return (
-        <Box
-            id={uniqueId}
+        <OptimalBox
+            // id={uniqueId}
             bgColor='black'
             maxWidth={maxWidth}
             maxHeight={maxHeight}
@@ -63,10 +61,10 @@ const _Img: React.FC<_ImgProps> = ({ image, alt, maxWidth, maxHeight, maxQuality
             justifyContent='center'
             alignItems='center'
             {...props}>
-            {isLoaded && <Image
+            <Image
                 rel={preload ? 'preload' : undefined}
                 fetchPriority={preload ? 'high' : undefined}
-                srcSet={srcSet}
+                srcSet={isHighQualityLoaded ? srcSet : lowQualitySrcSet}
                 maxWidth={maxWidth}
                 maxHeight={maxHeight}
                 src={src}
@@ -75,8 +73,8 @@ const _Img: React.FC<_ImgProps> = ({ image, alt, maxWidth, maxHeight, maxQuality
                 width='100%'
                 height='100%'
                 objectFit='contain'
-            />}
-        </Box>
+            />
+        </OptimalBox>
     );
 };
 
