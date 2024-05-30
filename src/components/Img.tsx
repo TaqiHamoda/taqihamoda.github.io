@@ -24,8 +24,8 @@ const _Img: React.FC<_ImgProps> = ({ image, alt, maxWidth, maxHeight, maxQuality
     const [isHighQualityLoaded, setIsHighQualityLoaded] = useState(false);
 
     const src = image.publicURL;
-    let srcSet = image.childImageSharp ? image.childImageSharp.gatsbyImageData.images.fallback.srcSet : src;
     const placeholder = image.childImageSharp ? image.childImageSharp.gatsbyImageData.placeholder.fallback : src;
+    let srcSet = image.childImageSharp ? image.childImageSharp.gatsbyImageData.images.fallback.srcSet : src;
 
     // Parse srcSet and filter out sizes that exceed maxWidth
     let lowQualitySrcSet;
@@ -53,7 +53,6 @@ const _Img: React.FC<_ImgProps> = ({ image, alt, maxWidth, maxHeight, maxQuality
 
     return (
         <OptimalBox
-            // id={uniqueId}
             bgColor='black'
             maxWidth={maxWidth}
             maxHeight={maxHeight}

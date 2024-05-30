@@ -61,7 +61,7 @@ export default function PageTemplate({ data, children, pageContext }: PageTempla
                     >
                         <Img
                             preload
-                            maxQuality={640}
+                            maxQuality={720}
                             width='full'
                             image={data.mdx.frontmatter.profile_image}
                             alt={"Profile Picture"}

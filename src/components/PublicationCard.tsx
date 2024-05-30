@@ -67,11 +67,9 @@ const PublicationCard = ({ publication, ...props }: PublicationCardProps) => {
                         image={publication.image}
                         alt={publication.title}
                         width='full'
-                        height='100%'
+                        height={isSmallScreen ? "200px" : "150px"}
                         maxQuality={360}
                         maxWidth={isSmallScreen ? "full" : "250px"}
-                        maxHeight={isSmallScreen ? "200px" : "150px"}
-                        minHeight={isSmallScreen ? "200px" : "150px"}
                         marginBottom={isSmallScreen ? 4 : 0}
                         marginRight={!isSmallScreen ? 4 : 0}
                     />

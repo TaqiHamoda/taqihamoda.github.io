@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Icon, IconProps } from '@chakra-ui/react';
 import { createIcon } from '@chakra-ui/icons';
-import { parse } from 'svg-parser';
+
+import parseSVG from '../utils/SVGParser';
 
 interface SVGIconProps extends IconProps {
   src: string;
@@ -17,12 +18,12 @@ const SVGIcon = ({ src, displayName, ...props }: SVGIconProps) => {
                 try {
                     const response = await fetch(src);
                     const svgText = await response.text();
-                    const parsedSvg = parse(svgText);
-                    const paths = parsedSvg.children[0].children.filter((child: any) => child.tagName === 'path');
+                    const parsedSvg = parseSVG(svgText);
+
                     const iconComponent = createIcon({
                         displayName: displayName,
-                        viewBox: parsedSvg.children[0].properties.viewBox,
-                        d: paths.map((path: any) => path.properties.d).join(' '),
+                        viewBox: parsedSvg.viewBox,
+                        d: parsedSvg.path as any,
                     });
                     setIcon(iconComponent);
                 } catch (error) {
