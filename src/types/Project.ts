@@ -1,5 +1,6 @@
 import ImgType from "./ImgType";
 
+
 export default interface Project {
     link: string;
     name: string;

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
     Image,
-    BoxProps,
     Modal,
     ModalOverlay,
     ModalContent,
@@ -11,35 +10,44 @@ import {
 
 import ImgType from '../types/ImgType';
 
-import OptimalBox from './OptimalBox';
+import OptimalBox, { OptimalBoxProps } from './OptimalBox';
 
-interface _ImgProps extends Omit<BoxProps, 'children'> {
+
+interface _ImgProps extends Omit<OptimalBoxProps, 'children'> {
     image: ImgType;
     alt: string;
     maxQuality?: number;
     preload?: boolean;
 }
 
-const _Img: React.FC<_ImgProps> = ({ image, alt, maxWidth, maxHeight, maxQuality, preload = false, ...props }) => {
+const _Img = ({ image, alt, maxWidth, maxHeight, maxQuality, preload = false, ...props }: _ImgProps) => {
     const [isHighQualityLoaded, setIsHighQualityLoaded] = useState(false);
 
     const src = image.publicURL;
-    const placeholder = image.childImageSharp ? image.childImageSharp.gatsbyImageData.placeholder.fallback : src;
-    let srcSet = image.childImageSharp ? image.childImageSharp.gatsbyImageData.images.fallback.srcSet : src;
+    const placeholder = image.childImageSharp ? image.childImageSharp.gatsbyImageData.placeholder.fallback : '';
 
-    // Parse srcSet and filter out sizes that exceed maxWidth
-    let lowQualitySrcSet;
-    if (maxQuality && srcSet !== src) {
-        const srcSetSizes = srcSet.split(',\n');
-        const filteredSrcSetSizes = srcSetSizes.filter(size => {
-            const width = parseInt(size.split(' ')[1].replace('w', ''));
-            return width <= maxQuality;
-        });
-        srcSet = filteredSrcSetSizes.length > 0 ? filteredSrcSetSizes.join(', ') : srcSetSizes[0];
-        lowQualitySrcSet = srcSetSizes[0];
-    } else {
-        lowQualitySrcSet = srcSet;
-    }
+    // SrcSet parsing function so the code is only executed when the image is within view
+    const srcSet = (getHighQuality: boolean): string => {
+        if (!image.childImageSharp) {
+            return '';
+        }
+
+        const srcSetSizes = image.childImageSharp.gatsbyImageData.images.fallback.srcSet.split(',\n');
+        if (!getHighQuality) {
+            return srcSetSizes[0];  // If the main thread is busy, return lowest quality image.
+        } else if (maxQuality) {
+            // If the maxQuality is specified, return the filtered srcset when thread is idle
+            const filteredSrcSetSizes = srcSetSizes.filter(size => {
+                const width = parseInt(size.split(' ')[1].replace('w', ''));
+                return width <= maxQuality;
+            });
+
+            // If all available qualities are higher than max quality, return the lowest
+            return filteredSrcSetSizes.length > 0 ? filteredSrcSetSizes.join(', ') : srcSetSizes[0];
+        }
+
+        return srcSetSizes.join(', ');
+    };
 
     // Progressive loading of images. Load the high-quality image when the main thread isn't busy
     useEffect(() => {
@@ -59,11 +67,11 @@ const _Img: React.FC<_ImgProps> = ({ image, alt, maxWidth, maxHeight, maxQuality
             display='flex'
             justifyContent='center'
             alignItems='center'
+            rel={preload ? 'preload' : undefined}
             {...props}>
             <Image
                 rel={preload ? 'preload' : undefined}
-                fetchPriority={preload ? 'high' : undefined}
-                srcSet={isHighQualityLoaded ? srcSet : lowQualitySrcSet}
+                srcSet={srcSet(isHighQualityLoaded)}
                 maxWidth={maxWidth}
                 maxHeight={maxHeight}
                 src={src}

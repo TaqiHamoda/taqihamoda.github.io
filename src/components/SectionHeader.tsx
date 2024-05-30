@@ -8,12 +8,13 @@ import {
 
 import StrongDivider from './StrongDivider';
 
+
 interface SectionHeaderProps extends BoxProps {
     children: any;
     subtext?: string;
 }
 
-const SectionHeader: React.FC<SectionHeaderProps> = ({ children, subtext, ...props }) => {
+const SectionHeader = ({ children, subtext, ...props }: SectionHeaderProps) => {
     return (
         <Box width='100%' {...props}>
             <Heading as='h2' size='xl'>

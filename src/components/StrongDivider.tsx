@@ -4,7 +4,8 @@ import {
     BoxProps,
 } from '@chakra-ui/react';
 
-const StrongDivider: React.FC<Omit<BoxProps, 'children'>> = (props) => {
+
+const StrongDivider = (props: Omit<BoxProps, 'children'>) => {
     return (
         <Box
             bgColor={'gray.500'}

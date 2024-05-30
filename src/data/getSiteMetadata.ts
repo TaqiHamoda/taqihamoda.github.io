@@ -2,6 +2,7 @@ import { useStaticQuery, graphql } from "gatsby";
 
 import SiteMedata from "../types/SiteMetadata";
 
+
 export default function getSiteMetadata(): SiteMedata {
     const data = useStaticQuery(graphql`
         query {

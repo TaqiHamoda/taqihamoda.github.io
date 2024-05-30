@@ -1,5 +1,6 @@
 import { useStaticQuery, graphql } from "gatsby";
 
+
 export default function getSiteBuildTime(): Date {
     const data = useStaticQuery(graphql`
         query {

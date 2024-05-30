@@ -13,9 +13,7 @@ function parseElement(element: Element, paths: string[]) {
             const cx = parseFloat(element.getAttribute("cx") ?? "0");
             const cy = parseFloat(element.getAttribute("cy") ?? "0");
             const r = parseFloat(element.getAttribute("r") ?? "0");
-            const circleD = `M${cx} ${cy}m${-r},0a${r},${r} 0 1,0 ${
-                2 * r
-            },0a${r},${r} 0 1,0 ${-2 * r},0`;
+            const circleD = `M${cx} ${cy}m${-r},0a${r},${r} 0 1,0 ${2 * r},0a${r},${r} 0 1,0 ${-2 * r},0`;
             paths.push(circleD);
             break;
         case "rect":
@@ -45,9 +43,7 @@ function parseElement(element: Element, paths: string[]) {
             const ellipseCy = parseFloat(element.getAttribute("cy") ?? "0");
             const rx = parseFloat(element.getAttribute("rx") ?? "0");
             const ry = parseFloat(element.getAttribute("ry") ?? "0");
-            const ellipseD = `M${ellipseCx} ${
-                ellipseCy - ry
-            }a${rx} ${ry} 0 1 0 ${2 * rx} 0a${rx} ${ry} 0 1 0 ${-2 * rx} 0`;
+            const ellipseD = `M${ellipseCx} ${ellipseCy - ry}a${rx} ${ry} 0 1 0 ${2 * rx} 0a${rx} ${ry} 0 1 0 ${-2 * rx} 0`;
             paths.push(ellipseD);
             break;
         case "g":

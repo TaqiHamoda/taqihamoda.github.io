@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, HeadFC } from "gatsby"
 import { MDXProvider } from "@mdx-js/react"
 import {
     Link,
@@ -27,7 +27,7 @@ import SectionHeader from "../components/SectionHeader";
 import PublicationsList from "../components/PublicationList";
 
 
-const shortcodes = { Link, Text, Heading, Flex, Spacer, HStack, VStack } // Provide common components here
+const shortcodes = { Link, Text, Heading, Flex, Spacer, HStack, VStack }  // Provide common components here
 
 interface PageTemplateProps {
     data: any,
@@ -135,7 +135,6 @@ query($id: String!) {
       }
     }
 }`;
-
 
 export function Head({ location, params, data, pageContext }: any) {
     return (

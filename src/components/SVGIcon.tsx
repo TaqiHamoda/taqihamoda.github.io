@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Icon, IconProps } from '@chakra-ui/react';
+import {
+    Icon,
+    IconProps
+} from '@chakra-ui/react';
 import { createIcon } from '@chakra-ui/icons';
 
 import parseSVG from '../utils/SVGParser';
+
 
 interface SVGIconProps extends IconProps {
   src: string;

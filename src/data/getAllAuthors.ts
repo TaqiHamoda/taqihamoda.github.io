@@ -2,6 +2,7 @@ import { useStaticQuery, graphql } from "gatsby";
 
 import Author from "../types/Author";
 
+
 export default function getAllAuthors() {
     const authors: { [key: string]: Author } = {};
 

@@ -2,6 +2,7 @@ import { useStaticQuery, graphql } from "gatsby";
 
 import Social from "../types/Social";
 
+
 export default function getAllSocials(): Social[] {
     const data = useStaticQuery(graphql`
         query {

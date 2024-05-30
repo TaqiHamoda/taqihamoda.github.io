@@ -1,6 +1,7 @@
 import Author from "./Author";
 import ImgType from "./ImgType";
 
+
 export default interface Publication {
     title: string;
     published: string;

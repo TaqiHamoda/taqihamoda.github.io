@@ -1,12 +1,16 @@
-import { Box, BoxProps } from '@chakra-ui/react';
 import React, { useState } from 'react';
+import {
+    Box,
+    BoxProps
+} from '@chakra-ui/react';
+
 
 interface SwipableBoxProps extends BoxProps {
     onSwipeLeft?: () => void;
     onSwipeRight?: () => void;
 }
 
-const SwipableBox: React.FC<SwipableBoxProps> = ({ onSwipeLeft, onSwipeRight, children, ...props }) => {
+const SwipableBox = ({ onSwipeLeft, onSwipeRight, children, ...props }: SwipableBoxProps) => {
     const [touchStart, setTouchStart] = useState(0);
     const [swipeDistance, setSwipeDistance] = useState(0);
 

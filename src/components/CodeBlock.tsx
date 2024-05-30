@@ -11,7 +11,7 @@ import { CopyIcon, CheckIcon } from '@chakra-ui/icons';
 
 
 interface CodeBlockProps extends BoxProps {
-    title?: string
+    title?: string;
 }
 
 const CodeBlock = ({ title, children, ...props }: CodeBlockProps) => {

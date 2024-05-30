@@ -21,7 +21,7 @@ interface ProjectCardProps extends LinkBoxProps {
     project: Project;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, ...props }) => {
+const ProjectCard = ({ project, ...props }: ProjectCardProps) => {
     const hoverBg = useColorModeValue('gray.200', 'gray.600');
     const cardBg = useColorModeValue('gray.100', 'gray.700');
 

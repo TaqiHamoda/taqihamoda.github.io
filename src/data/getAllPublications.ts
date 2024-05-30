@@ -5,6 +5,7 @@ import Publication from "../types/Publication";
 
 import getAllAuthors from "./getAllAuthors";
 
+
 export default function getAllPublications() {
     const publications: Publication[] = [];
 

@@ -6,7 +6,7 @@ import {
 } from '@chakra-ui/react';
 
 
-interface OptimalBoxProps extends BoxProps {
+export interface OptimalBoxProps extends BoxProps {
     delay?: boolean;
 }
 

@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
     Box,
     BoxProps,
@@ -9,19 +10,18 @@ import {
     useBreakpointValue
 } from '@chakra-ui/react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
-import React, { useState } from 'react';
 
 import SwipableBox from './SwipableBox';
 
 
-interface CarouselProps extends BoxProps {
+interface SlideProps {
     children: React.ReactNode[];
-    direction?: 'horizontal' | 'vertical';
-    itemsPerSlide?: number[];
-    gap?: number;
+    direction: 'horizontal' | 'vertical';
+    gap: number;
+    isVisible: boolean
 }
 
-const Slide = ({ children, direction, gap, isVisible }: { children: React.ReactNode[]; direction: 'horizontal' | 'vertical'; gap: number; isVisible: boolean }) => {
+const Slide = ({ children, direction, gap, isVisible }: SlideProps) => {
     return (
         <Box marginX={20} display={isVisible ? 'block' : 'none'}>
             <Grid
@@ -35,7 +35,14 @@ const Slide = ({ children, direction, gap, isVisible }: { children: React.ReactN
     );
 };
 
-const Carousel: React.FC<CarouselProps> = ({ children, direction = 'horizontal', itemsPerSlide = [1, 2, 3, 4, 5], gap = 10, ...props }) => {
+interface CarouselProps extends BoxProps {
+    children: React.ReactNode[];
+    direction?: 'horizontal' | 'vertical';
+    itemsPerSlide?: number[];
+    gap?: number;
+}
+
+const Carousel = ({ children, direction = 'horizontal', itemsPerSlide = [1, 2, 3, 4, 5], gap = 10, ...props }: CarouselProps) => {
     const items = useBreakpointValue(itemsPerSlide) as number;
 
     const [currentSlide, setCurrentSlide] = useState(0);
