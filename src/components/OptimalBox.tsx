@@ -8,11 +8,12 @@ import {
 
 export interface OptimalBoxProps extends BoxProps {
     delay?: boolean;
+    lazyLoad?: boolean;
 }
 
-const OptimalBox = ({ children, delay = false, ...props }: OptimalBoxProps) => {
+const OptimalBox = ({ children, delay = false, lazyLoad = false, ...props }: OptimalBoxProps) => {
     const uniqueId = useId();
-    const [isLoaded, setIsLoaded] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(!lazyLoad);
     const [isMainThreadIdle, setIsMainThreadIdle] = useState(false);
 
     // Lazy loading for the component, only show when in user view
@@ -24,7 +25,7 @@ const OptimalBox = ({ children, delay = false, ...props }: OptimalBoxProps) => {
             }
         };
 
-        handleScroll();
+        window.requestIdleCallback(handleScroll);
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, [uniqueId]);

@@ -68,9 +68,9 @@ const _Img = ({ image, alt, maxWidth, maxHeight, maxQuality, preload = false, ..
             justifyContent='center'
             alignItems='center'
             rel={preload ? 'preload' : undefined}
+            lazyLoad={preload ? false : true}
             {...props}>
             <Image
-                rel={preload ? 'preload' : undefined}
                 srcSet={srcSet(isHighQualityLoaded)}
                 maxWidth={maxWidth}
                 maxHeight={maxHeight}

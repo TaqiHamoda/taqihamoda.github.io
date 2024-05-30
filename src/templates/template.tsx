@@ -63,6 +63,7 @@ export default function PageTemplate({ data, children, pageContext }: PageTempla
                             preload
                             maxQuality={720}
                             width='full'
+                            maxWidth={isSmallScreen ? 'full' : '360px'}
                             image={data.mdx.frontmatter.profile_image}
                             alt={"Profile Picture"}
                         />
@@ -84,7 +85,7 @@ export default function PageTemplate({ data, children, pageContext }: PageTempla
                 </Box>
 
                 {/* Projects Section */}
-                <OptimalBox delay width='full'>
+                <OptimalBox lazyLoad delay width='full'>
                     <SectionHeader
                         marginTop={5}
                         subtext="projects am proud to be a part of :)"
@@ -103,7 +104,7 @@ export default function PageTemplate({ data, children, pageContext }: PageTempla
                 </OptimalBox>
 
                 {/* Publications Section */}
-                <OptimalBox delay width='full'>
+                <OptimalBox lazyLoad delay width='full'>
                     <SectionHeader
                         subtext="feel free to reach out with any questions or concerns"
                     >

@@ -38,7 +38,7 @@ const PublicationCard = ({ publication, ...props }: PublicationCardProps) => {
             {author.tag === '@me' ? (
                 <strong><u>{author.name}</u></strong>
             ) : author.website ? (
-                <Link href={author.website} isExternal color="teal.500" textDecoration="underline dashed">
+                <Link href={author.website} isExternal color="teal.500">
                     {author.name}
                 </Link>
             ) : (
