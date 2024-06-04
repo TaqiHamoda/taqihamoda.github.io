@@ -1,22 +1,47 @@
 [
     {
-        "name": "Taqi Hamoda",
+        "name": [
+            ["en", "Taqi Hamoda"],
+            ["es", "Taqi Hamoda"],
+            ["ar", "تقي حموده"]
+        ],
         "tag": "@me",
         "website": ""
     },
     {
-        "name": "Reinhard M. Grassman",
+        "name": [
+            ["en", "Reinhard M. Grassman"],
+            ["es", "Reinhard M. Grassman"],
+            ["ar", "رينهارد م. جراسمان"]
+        ],
         "tag": "RGrassman",
         "website": "https://reinhardgrassmann.github.io/"
     },
     {
-        "name": "Jessica Burgner-Kahrs",
+        "name": [
+            ["en", "Jessica Burgner-Kahrs"],
+            ["es", "Jessica Burgner-Kahrs"],
+            ["ar", "جسيكا برجنر-كاهرس"]
+        ],
         "tag": "JBK",
         "website": "https://www.cs.toronto.edu/~jbk/"
     },
     {
-        "name": "Chengnan Shentu",
+        "name": [
+            ["en", "Chengnan Shentu"],
+            ["es", "Chengnan Chentu"],
+            ["ar", "شنجنن شنتو"]
+        ],
         "tag": "CShentu",
         "website": "https://www.cs.toronto.edu/~cshentu/"
+    },
+    {
+        "name": [
+            ["en", "Puspita Triana Dewi"],
+            ["es", "Puspita Triana Dewi"],
+            ["ar", "بسبيتا تريانا دوي"]
+        ],
+        "tag": "PTD",
+        "website": ""
     }
 ]

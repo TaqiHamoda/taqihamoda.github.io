@@ -1,11 +1,19 @@
 [
     {
-        "name": "GitHub",
+        "name": [
+            ["en", "GitHub"],
+            ["es", "GitHub"],
+            ["ar", "جيت هب"]
+        ],
         "url": "https://github.com/TaqiHamoda",
         "icon": "../assets/images/socials/github.svg"
     },
     {
-        "name": "LinkedIn",
+        "name": [
+            ["en", "LinkedIn"],
+            ["es", "LinkedIn"],
+            ["ar", "لينكد إن"]
+        ],
         "url": "https://www.linkedin.com/in/taqi-hamoda",
         "icon": "../assets/images/socials/linkedin.svg"
     }

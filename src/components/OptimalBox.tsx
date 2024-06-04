@@ -18,17 +18,32 @@ const OptimalBox = ({ children, delay = false, lazyLoad = false, ...props }: Opt
 
     // Lazy loading for the component, only show when in user view
     useEffect(() => {
-        const handleScroll = () => {
-            const boxElement = document.getElementById(uniqueId);
-            if (boxElement && boxElement.getBoundingClientRect().top < window.innerHeight) {
+        if (isLoaded){
+            return;
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
                 setIsLoaded(true);
+                observer.unobserve(entries[0].target);
+            }
+        },{
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.0
+        });
+
+        const boxElement = document.getElementById(uniqueId);
+        if (boxElement) {
+            observer.observe(boxElement);
+        }
+
+        return () => {
+            if (boxElement) {
+                observer.unobserve(boxElement);
             }
         };
-
-        window.requestIdleCallback(handleScroll);
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [uniqueId]);
+    }, [uniqueId, isLoaded]);
 
     // Progressively load the component when the main thread is idle. Enabled by delay
     useEffect(() => {

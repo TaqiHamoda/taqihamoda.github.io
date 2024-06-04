@@ -1,0 +1,15 @@
+{
+    "carousel_left": "Previous slide",
+    "carousel_right": "Next slide",
+    "carousel_dot": "Slide {{slide_num}}",
+    "code_clipboard": "Copy to clipboard",
+    "navbar_theme": "Toggle Theme",
+    "footer_social": "Feel free to contact me at any time.",
+    "footer_update": "Last updated on: {{update_date}}",
+    "pub_arxiv": "arXiv",
+    "pub_pdf": "PDF",
+    "pub_publisher": "PUBLISHER",
+    "pub_website": "WEBSITE",
+    "pub_abstract": "Toggle abstract",
+    "pub_bibtex": "BibTeX CITATION"
+}

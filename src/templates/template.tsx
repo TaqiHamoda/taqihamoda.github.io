@@ -1,6 +1,6 @@
-import React from "react"
-import { graphql, HeadFC } from "gatsby"
-import { MDXProvider } from "@mdx-js/react"
+import React from "react";
+import { graphql } from "gatsby";
+import { MDXProvider } from "@mdx-js/react";
 import {
     Link,
     Text,
@@ -9,9 +9,11 @@ import {
     Flex,
     Spacer,
     VStack,
-    HStack,
-    useBreakpointValue
-} from '@chakra-ui/react'
+    HStack
+} from '@chakra-ui/react';
+import { Trans, useTranslation } from 'gatsby-plugin-react-i18next';
+
+import useIsScreenSize from "../utils/useIsScreenSize";
 
 import getAllProjects from '../data/getAllProjects';
 import getAllPublications from '../data/getAllPublications';
@@ -39,7 +41,7 @@ export default function PageTemplate({ data, children, pageContext }: PageTempla
     const projects = getAllProjects();
     const publications = getAllPublications();
 
-    const isSmallScreen = useBreakpointValue({ base: true, md: false });
+    const isSmallScreen = useIsScreenSize(768);
 
     return (
         <VStack alignItems={'center'}>
@@ -54,7 +56,7 @@ export default function PageTemplate({ data, children, pageContext }: PageTempla
 
                 <Box>
                     <Box
-                        float={"right"}
+                        float="right"
                         width='full'
                         maxWidth={isSmallScreen ? 'full' : '360px'}
                         marginLeft={isSmallScreen ? 0 : 5}
@@ -63,7 +65,6 @@ export default function PageTemplate({ data, children, pageContext }: PageTempla
                             preload
                             maxQuality={720}
                             width='full'
-                            maxWidth={isSmallScreen ? 'full' : '360px'}
                             image={data.mdx.frontmatter.profile_image}
                             alt={"Profile Picture"}
                         />
@@ -106,7 +107,7 @@ export default function PageTemplate({ data, children, pageContext }: PageTempla
                 {/* Publications Section */}
                 <OptimalBox lazyLoad delay width='full'>
                     <SectionHeader
-                        subtext="feel free to reach out with any questions or concerns"
+                        subtext="please reach out with any questions or concerns"
                     >
                         publications
                     </SectionHeader>

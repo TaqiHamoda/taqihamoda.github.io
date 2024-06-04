@@ -2,16 +2,28 @@
     {
         "name": "Gatsby.js",
         "url": "https://www.gatsbyjs.com/",
-        "description": "Powered by Gatsby.js"
+        "description": [
+            ["en", "Powered by Gatsby.js"],
+            ["es", "Energizado por Gatsby.js"],
+            ["ar", "مبني بجتسبي"]
+        ]
     },
     {
         "name": "al-folio theme",
         "url": "https://github.com/alshedivat/al-folio",
-        "description": "Inspired by al-folio theme"
+        "description": [
+            ["en", "Inspired by al-folio theme"],
+            ["es", "Inspirado en el tema al-folio"],
+            ["ar", "تصميم الموقع مستوحى من مشروع الفوليو"]
+        ]
     },
     {
         "name": "repository",
         "url": "https://github.com/TaqiHamoda/taqihamoda.github.io",
-        "description": "Source code repository"
+        "description": [
+            ["en", "Source code repository"],
+            ["es", "Repositorio de código"],
+            ["ar", "مصدر أصل الموقع"]
+        ]
     }
 ]

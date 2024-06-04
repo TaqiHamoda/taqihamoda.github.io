@@ -1,7 +1,15 @@
 {
-    "name": "CRVisToolkit",
+    "name": [
+        ["en", "CRVisToolkit"],
+        ["es", "Útiles de CRVis"],
+        ["ar", "أدوات سي.ار.فيز"]
+    ],
     "year": 2023,
-    "description": "The Continuum Robotics Visualization Toolkit (CRVizToolkit). Developed the python port.",
+    "description": [
+        ["en", "The Continuum Robotics Visualization Toolkit (CRVizToolkit). Developed the python port."],
+        ["es", "El kit de herramientas de visualización de robótica continua (Útiles de CRVis). Desarrollé la versión Python."],
+        ["ar", "مجموعة أدوات تصور الروبوتات المستمرة (أدوات سي.ار.فيز). لقد قمت بتطوير نسخة بايثون."]
+    ],
     "image": "../../assets/images/projects/tdcr_viz.png",
     "link": "https://github.com/ContinuumRoboticsLab/CRVisToolkit"
 }

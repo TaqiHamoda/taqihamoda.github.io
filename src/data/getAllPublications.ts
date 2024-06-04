@@ -13,7 +13,6 @@ export default function getAllPublications() {
         query {
             allBibliographyJson(sort: { published: DESC }) {
                 nodes {
-                    abstract
                     arxiv
                     authors
                     bibtex
@@ -27,7 +26,7 @@ export default function getAllPublications() {
                     title
                     url
                     website
-                    tags
+                    keywords
                     preview {
                         publicURL
                         childImageSharp {

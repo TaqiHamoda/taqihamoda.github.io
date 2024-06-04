@@ -2,6 +2,8 @@ import { useStaticQuery, graphql } from "gatsby";
 
 import Author from "../types/Author";
 
+import getAllSchemas from "./getAllSchemas";
+import parseSchema from "../utils/parseSchema";
 
 export default function getAllAuthors() {
     const authors: { [key: string]: Author } = {};
@@ -17,9 +19,14 @@ export default function getAllAuthors() {
         }
     }`);
 
-    data.allAuthorsJson.nodes.forEach((author: Author) => {
+    const schema = getAllSchemas()["authors"];
+    const parsed_data = parseSchema(schema, data.allAuthorsJson.nodes);
+
+    parsed_data.forEach((author: Author) => {
         authors[author.tag] = author;
     });
+
+    console.log(parsed_data);
 
     return authors;
 }

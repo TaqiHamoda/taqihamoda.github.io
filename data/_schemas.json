@@ -1,0 +1,22 @@
+[
+    {
+        "schema": "authors",
+        "locale_properties": ["name"]
+    },
+    {
+        "schema": "socials",
+        "locale_properties": ["name"]
+    },
+    {
+        "schema": "projects",
+        "locale_properties": ["name", "description"]
+    },
+    {
+        "schema": "bibliograaphy",
+        "locale_properties": ["title", "publisher", "journal", "keywords"]
+    },
+    {
+        "schema": "abstracts",
+        "locale_properties": ["abstract"]
+    }
+]

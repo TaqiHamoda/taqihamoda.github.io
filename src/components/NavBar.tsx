@@ -32,6 +32,7 @@ const NavBar = (props: FlexProps) => {
                 onClick={toggleColorMode}
                 alignSelf="center"
                 aria-label='Theme Toggle Button'
+                title='Toggle Theme'
                 margin={2}
                 icon={useColorModeValue(<SunIcon />, <MoonIcon />)}
             />

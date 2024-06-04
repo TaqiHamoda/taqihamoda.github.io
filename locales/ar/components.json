@@ -1,0 +1,15 @@
+{
+    "carousel_left": "المجموعة التالية",
+    "carousel_right": "المجموعة السابقة",
+    "carousel_dot": "المجموعة رقم {{slide_num}}",
+    "code_clipboard": "انسخه",
+    "navbar_theme": "غير لون الخلفية",
+    "footer_social": "ممكن تتواصل معايا في أي وقت.",
+    "footer_update": "أخر تحديث كان بتاريخ: {{update_date}}",
+    "pub_arxiv": "أرشيف",
+    "pub_pdf": "بي.دي.إف",
+    "pub_publisher": "مجلة النشر",
+    "pub_website": "الموقع",
+    "pub_abstract": "الملخص",
+    "pub_bibtex": "اقتباس ببتيكس"
+}

@@ -1,7 +1,15 @@
 {
-    "name": "Aqua Drone",
+    "name": [
+        ["en", "Aqua Drone"],
+        ["es", "Dron acuático"],
+        ["ar", "اكوا درون"]
+    ],
     "year": 2020,
-    "description": "Underwater mapping and exploration using a custom built drone. The goal is fully autonomous mapping.",
+    "description": [
+        ["en", "Underwater mapping and exploration using a custom built drone. The goal is fully autonomous mapping."],
+        ["es", "Mapeo y exploración submarina utilizando un dron personalizado. El objetivo es un mapeo totalmente autónomo."],
+        ["ar", "رسم الخرائط والاستكشاف تحت الماء باستخدام روبوت مصمم خصيصًا. الهدف هو رسم الخرائط مستقلة تماما."]
+    ],
     "image": "../../assets/images/projects/aqua_drone.gif",
     "link": "https://github.com/TaqiHamoda/aqua_drone"
 }
