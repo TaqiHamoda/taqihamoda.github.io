@@ -14,12 +14,6 @@ exports.createPages = async ({
 }: createPagesProps) => {
     const { createPage } = actions;
 
-    // taqi hamoda: تقي حموده
-    // last update: أخر تحديث
-    // source code repository: مصدر أصل الموقع
-    // inspired by al-folio theme: تصميم الموقع مستوحى من مشروع الفوليو
-    // powered by Gatsby: مبني بجتسبي
-
     const result = await graphql(`
         query {
             allMdx {

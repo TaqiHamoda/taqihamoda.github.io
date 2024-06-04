@@ -5,6 +5,7 @@ import Author from "../types/Author";
 import getAllSchemas from "./getAllSchemas";
 import parseSchema from "../utils/parseSchema";
 
+
 export default function getAllAuthors() {
     const authors: { [key: string]: Author } = {};
 
@@ -25,8 +26,6 @@ export default function getAllAuthors() {
     parsed_data.forEach((author: Author) => {
         authors[author.tag] = author;
     });
-
-    console.log(parsed_data);
 
     return authors;
 }

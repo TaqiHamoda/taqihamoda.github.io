@@ -1,5 +1,9 @@
 [
     {
+        "schema": "info",
+        "locale_properties": ["description"]
+    },
+    {
         "schema": "authors",
         "locale_properties": ["name"]
     },

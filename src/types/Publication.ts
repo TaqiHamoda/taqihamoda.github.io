@@ -15,5 +15,5 @@ export default interface Publication {
     website: string;
     url: string;
     bibtex: string;
-    tags: string[];
+    keywords: string[];
 };

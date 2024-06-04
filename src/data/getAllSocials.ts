@@ -2,6 +2,9 @@ import { useStaticQuery, graphql } from "gatsby";
 
 import Social from "../types/Social";
 
+import getAllSchemas from "./getAllSchemas";
+import parseSchema from "../utils/parseSchema";
+
 
 export default function getAllSocials(): Social[] {
     const data = useStaticQuery(graphql`
@@ -18,5 +21,7 @@ export default function getAllSocials(): Social[] {
         }
     `);
 
-    return data.allSocialsJson.nodes;
+    const schema = getAllSchemas()["socials"];
+
+    return parseSchema(schema, data.allSocialsJson.nodes);
 }

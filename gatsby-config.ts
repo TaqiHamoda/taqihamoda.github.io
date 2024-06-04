@@ -34,13 +34,13 @@ const config: GatsbyConfig = {
                     keySeparator: false,
                     nsSeparator: false,
                 },
-                pages: [
-                    {
-                        matchPath: "/content/:lang?/:uid",
-                        getLanguageFromPath: true,
-                        excludeLanguages: ["ar"],
-                    },
-                ],
+                // pages: [
+                //     {
+                //         matchPath: "/content/:lang?/:uid?.mdx",
+                //         getLanguageFromPath: true,
+                //         // excludeLanguages: ["ar"],
+                //     },
+                // ],
             },
         },
         {

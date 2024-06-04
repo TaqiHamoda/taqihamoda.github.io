@@ -11,7 +11,7 @@ import {
     VStack,
     HStack
 } from '@chakra-ui/react';
-import { Trans, useTranslation } from 'gatsby-plugin-react-i18next';
+import { useTranslation } from 'gatsby-plugin-react-i18next';
 
 import useIsScreenSize from "../utils/useIsScreenSize";
 
@@ -42,6 +42,8 @@ export default function PageTemplate({ data, children, pageContext }: PageTempla
     const publications = getAllPublications();
 
     const isSmallScreen = useIsScreenSize(768);
+
+    const { t } = useTranslation();
 
     return (
         <VStack alignItems={'center'}>
@@ -125,14 +127,23 @@ export default function PageTemplate({ data, children, pageContext }: PageTempla
 }
 
 export const query = graphql`
-query($id: String!) {
-    mdx(id: {eq: $id}) {
+query($id: String!, $language: String!) {
+    mdx(id: {eq: $id}, frontmatter: {locale: {eq: $language}}) {
       frontmatter {
         profile_image {
             publicURL
             childImageSharp {
                 gatsbyImageData
           }
+        }
+      }
+    }
+    locales: allLocale(filter: {ns: { in: ["index", "components"] }, language: {eq: $language}}) {
+      edges {
+        node {
+          ns
+          data
+          language
         }
       }
     }

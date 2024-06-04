@@ -4,6 +4,8 @@ import Author from "../types/Author";
 import Publication from "../types/Publication";
 
 import getAllAuthors from "./getAllAuthors";
+import getAllSchemas from "./getAllSchemas";
+import parseSchema from "../utils/parseSchema";
 
 
 export default function getAllPublications() {
@@ -40,7 +42,10 @@ export default function getAllPublications() {
 
     const authors = getAllAuthors();
 
-    data.allBibliographyJson.nodes.forEach((publication: any) => {
+    const schema = getAllSchemas()["bibliograaphy"];
+    const parsed_data = parseSchema(schema, data.allBibliographyJson.nodes);
+
+    parsed_data.forEach((publication: any) => {
         const pub_authors: Author[] = [];
 
         publication.authors.forEach((author: string) => {
@@ -68,7 +73,7 @@ export default function getAllPublications() {
             url: publication.url,
             website: publication.website,
             bibtex: publication.bibtex,
-            tags: publication.tags,
+            keywords: publication.keywords,
         });
     });
 
