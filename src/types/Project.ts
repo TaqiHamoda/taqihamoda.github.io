@@ -7,4 +7,4 @@ export default interface Project {
     image: ImgType;
     year: number;
     description: string;
-}
+};

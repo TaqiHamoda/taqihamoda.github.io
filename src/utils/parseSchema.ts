@@ -1,10 +1,9 @@
-import { useI18next } from 'gatsby-plugin-react-i18next';
-
+import getCurrentLanguage from "../data/getCurrentLanguage";
 import Schema from "../types/Schema";
 
 
 export default function parseSchema(schema: Schema, objs: any[]): any[] {
-    const { language } = useI18next();
+    const language = getCurrentLanguage().code;
 
     const result: any[] = objs.map((obj) => {
         const parsed_obj: any = {};

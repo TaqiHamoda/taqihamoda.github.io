@@ -1,8 +1,5 @@
 import type { GatsbyConfig } from "gatsby";
 
-import languageInfo from './language';
-
-
 const siteUrl = `https://taqihamoda.github.io/`;
 
 const config: GatsbyConfig = {
@@ -24,9 +21,9 @@ const config: GatsbyConfig = {
             resolve: `gatsby-plugin-react-i18next`,
             options: {
                 localeJsonSourceName: `locales`, // name given to `gatsby-source-filesystem` plugin.
-                languages: languageInfo.languages,
-                defaultLanguage: languageInfo.defaultLanguage,
-                fallbackLanguage: languageInfo.defaultLanguage,
+                languages: ['ar', 'en', 'es'],
+                defaultLanguage: 'en',
+                fallbackLanguage: 'en',
                 siteUrl: siteUrl,
                 // if you are using trailingSlash gatsby config include it here, as well (the default is 'always')
                 trailingSlash: "always",
@@ -40,7 +37,7 @@ const config: GatsbyConfig = {
                 },
                 pages: [
                     {
-                      matchPath: '/:lang?/',
+                      matchPath: '/:lang?/(.*)',
                       getLanguageFromPath: true,
                       languages: ['ar', 'en', 'es']
                     }

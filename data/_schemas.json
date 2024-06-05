@@ -1,6 +1,6 @@
 [
     {
-        "schema": "info",
+        "schema": "footer",
         "locale_properties": ["description"]
     },
     {

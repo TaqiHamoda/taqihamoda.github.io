@@ -1,15 +1,15 @@
 import { useStaticQuery, graphql } from "gatsby";
 
-import Info from "../types/Info";
+import FooterInfo from "../types/FooterInfo";
 
 import getAllSchemas from "./getAllSchemas";
 import parseSchema from "../utils/parseSchema";
 
 
-export default function getAllInfo(): Info[] {
+export default function getAllFooterInfo(): FooterInfo[] {
     const data = useStaticQuery(graphql`
         query {
-            allInfoJson {
+            allFooterJson {
                 nodes {
                     name
                     url
@@ -19,9 +19,9 @@ export default function getAllInfo(): Info[] {
         }
     `);
 
-    const schema = getAllSchemas()["info"];
+    const schema = getAllSchemas()["footer"];
 
-    return parseSchema(schema, data.allInfoJson.nodes);
+    return parseSchema(schema, data.allFooterJson.nodes);
 }
 
 

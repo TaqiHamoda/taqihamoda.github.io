@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react';
 
 import getAllSocials from '../data/getAllSocials';
-import getAllInfo from '../data/getAllInfo';
+import getAllFooterInfo from '../data/getAllFooterInfo';
 import getSiteBuildTime from '../data/getSiteBuildTime';
 
 import SVGIcon from './SVGIcon';
@@ -20,7 +20,7 @@ interface FooterProps extends BoxProps {
 }
 
 const Footer = ({ firstname, surname, ...props }: FooterProps) => {
-    const infos = getAllInfo();
+    const infos = getAllFooterInfo();
     const socials = getAllSocials();
     const updateDate = getSiteBuildTime();
 
