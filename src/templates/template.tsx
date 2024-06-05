@@ -128,7 +128,7 @@ export default function PageTemplate({ data, children, pageContext }: PageTempla
 
 export const query = graphql`
 query($id: String!, $language: String!) {
-    mdx(id: {eq: $id}, frontmatter: {locale: {eq: $language}}) {
+    mdx(id: {eq: $id}) {
       frontmatter {
         profile_image {
             publicURL
@@ -138,7 +138,7 @@ query($id: String!, $language: String!) {
         }
       }
     }
-    locales: allLocale(filter: {ns: { in: ["index", "components"] }, language: {eq: $language}}) {
+    locales: allLocale(filter: {language: {eq: $language}}) {
       edges {
         node {
           ns

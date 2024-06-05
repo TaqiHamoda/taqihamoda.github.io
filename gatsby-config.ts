@@ -1,5 +1,8 @@
 import type { GatsbyConfig } from "gatsby";
 
+import languageInfo from './language';
+
+
 const siteUrl = `https://taqihamoda.github.io/`;
 
 const config: GatsbyConfig = {
@@ -16,13 +19,14 @@ const config: GatsbyConfig = {
         `gatsby-plugin-sitemap`,
         `gatsby-transformer-json`,
         `gatsby-transformer-sharp`, // Needed for dynamic images
-        {  // Documentation: https://www.gatsbyjs.com/plugins/gatsby-plugin-react-i18next/?=gatsby%20plugin%20react%20i18n
+        {
+            // Documentation: https://www.gatsbyjs.com/plugins/gatsby-plugin-react-i18next/?=gatsby%20plugin%20react%20i18n
             resolve: `gatsby-plugin-react-i18next`,
             options: {
                 localeJsonSourceName: `locales`, // name given to `gatsby-source-filesystem` plugin.
-                languages: [`en`, `es`, `ar`],
-                defaultLanguage: `en`,
-                fallbackLanguage: 'en',
+                languages: languageInfo.languages,
+                defaultLanguage: languageInfo.defaultLanguage,
+                fallbackLanguage: languageInfo.defaultLanguage,
                 siteUrl: siteUrl,
                 // if you are using trailingSlash gatsby config include it here, as well (the default is 'always')
                 trailingSlash: "always",
@@ -34,13 +38,14 @@ const config: GatsbyConfig = {
                     keySeparator: false,
                     nsSeparator: false,
                 },
-                // pages: [
-                //     {
-                //         matchPath: "/content/:lang?/:uid?.mdx",
-                //         getLanguageFromPath: true,
-                //         // excludeLanguages: ["ar"],
-                //     },
-                // ],
+                pages: [
+                    {
+                      matchPath: '/:lang?/',
+                      getLanguageFromPath: true,
+                      languages: ['ar', 'en', 'es']
+                    }
+                  ]
+            
             },
         },
         {
