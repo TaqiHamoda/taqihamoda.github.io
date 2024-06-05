@@ -1,10 +1,11 @@
 import React from "react"
 
-import getCurrentLanguage from "../data/getCurrentLanguage";
+import Language from "../types/Language";
 import getSiteMetadata from '../data/getSiteMetadata';
 
 
 interface SEOProps {
+    langInfo: Language;
     title?: string;
     description?: string;
     path?: string;
@@ -13,9 +14,7 @@ interface SEOProps {
     isLocalImage?: boolean;
 };
 
-const SEO = ({ title, description, path, image = '', isLocalImage = false, children }: SEOProps) => {
-    const langInfo = getCurrentLanguage();
-
+const SEO = ({ title, description, path, langInfo, image = '', isLocalImage = false, children }: SEOProps) => {
     const siteMetadata = getSiteMetadata();
 
     const seo = {
