@@ -8,7 +8,7 @@
     "description": [
         ["en", "Visualizing the inner working of Neural Networks using Manim. CSC492 Project."],
         ["es", "Visualizando el funcionamiento interno de las redes neuronales utilizando Manim. Proyecto CSC492."],
-        ["ar", "تصور العمل الداخلي للشبكات الاصطناعية باستخدام مانيم. مشروع سي.أس.سي ٤٩٢."]
+        ["ar", "تصوير العمل الداخلي للشبكات الاصطناعية باستخدام مانيم. مشروع سي.أس.سي ٤٩٢."]
     ],
     "image": "../../assets/images/projects/nn_viz.gif",
     "link": "https://github.com/TaqiHamoda/CSC492VisualDesignForDeepLearningConcepts"

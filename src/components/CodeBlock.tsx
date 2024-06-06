@@ -59,7 +59,11 @@ const CodeBlock = ({ title, children, ...props }: CodeBlockProps) => {
                 padding={4}
                 dir='ltr'
             >
-                <Box marginTop={10}>{children}</Box>
+                <Box
+                marginTop={10}
+                >
+                    {children}
+                </Box>
             </Code>
         </Box>
     );
