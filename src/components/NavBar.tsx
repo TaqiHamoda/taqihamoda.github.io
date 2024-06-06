@@ -31,7 +31,7 @@ const NavBar = (props: FlexProps) => {
             position="fixed"
             paddingX={3}
             gap={2}
-            bgColor={useColorModeValue('gray.100', 'gray.900')}
+            backgroundColor={useColorModeValue('lightgray', 'gray.900')}
             opacity={0.75}
             zIndex={999}
             alignItems='center'
