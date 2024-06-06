@@ -1,7 +1,7 @@
 import React from "react";
 import type { GatsbySSR } from "gatsby";
 import { ColorModeScript } from "@chakra-ui/react";
-import { WrapRootElement } from "./src/provider";
+import { WrapPageElement } from "./src/provider";
 import { customTheme } from "./src/theme";
 
 
@@ -14,6 +14,10 @@ export const onRenderBody: GatsbySSR['onRenderBody'] = ({ setPreBodyComponents }
   ])
 };
 
-export const wrapRootElement: GatsbySSR['wrapRootElement'] = ({ element }) => (
-   <WrapRootElement element={element} />
-);
+export const wrapPageElement: GatsbySSR['wrapPageElement'] = ({ element, props }) => {
+  const langInfo: any = props.pageContext.i18n;
+
+  return (
+     <WrapPageElement element={element} lang={langInfo.language} />
+  );
+};

@@ -157,7 +157,7 @@ query($id: String!, $language: String!) {
     }
 }`;
 
-export function Head({ location, params, data, pageContext }: any) {
+export const Head = ({ location, params, data, pageContext }: any) => {
     return (
         <SEO
             isLocalImage
@@ -168,4 +168,4 @@ export function Head({ location, params, data, pageContext }: any) {
             path={location.pathname}
         />
     );
-}
+};

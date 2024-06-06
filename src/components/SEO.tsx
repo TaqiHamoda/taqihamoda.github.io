@@ -31,6 +31,7 @@ const SEO = ({ title, description, path, langInfo, image = '', isLocalImage = fa
             <link rel="alternate" href={seo.url} hrefLang={langInfo.hrefLang} />
 
             <title>{seo.title}</title>
+
             <meta name="title" content={seo.title} />
             <meta name="description" content={seo.description} />
 

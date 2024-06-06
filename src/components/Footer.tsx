@@ -28,6 +28,11 @@ const Footer = ({ firstname, surname, ...props }: FooterProps) => {
     const updateDate = getSiteBuildTime();
 
     const updateYear = updateDate.toLocaleString(language, { year: 'numeric' });
+    const buildDate = updateDate.toLocaleDateString(language, {
+        year: 'numeric',
+        month: 'long',
+        day: '2-digit'
+    });
 
     return (
         <Box as="footer" width="100%" padding={5} {...props}>
@@ -55,11 +60,7 @@ const Footer = ({ firstname, surname, ...props }: FooterProps) => {
                 </Text>
 
                 <Text color='gray.500' fontSize='xs'>
-                {t('footer_update') as string} {updateDate.toLocaleDateString(language, {
-                        year: 'numeric',
-                        month: 'long',
-                        day: '2-digit'
-                    })}
+                {t('footer_update') as string} {buildDate}
                 </Text>
 
                 {infos.map((info: any) => (

@@ -7,8 +7,7 @@ import {
     SimpleGrid,
     useColorModeValue,
 } from '@chakra-ui/react';
-
-import getCurrentLanguage from '../data/getCurrentLanguage';
+import { useI18next } from 'gatsby-plugin-react-i18next';
 
 import Publication from '../types/Publication';
 
@@ -21,18 +20,20 @@ interface PublicationsListProps extends BoxProps {
 
 const PublicationsList = ({ publications, ...props }: PublicationsListProps) => {
     const yearColor = useColorModeValue('gray.400', 'gray.600');
+    const { language } = useI18next();
+
     const groupedPublications: { [key: number]: Publication[] } = {};
+    const groupedYearsLocale: { [key: number]: string } = {};
 
     publications.forEach(publication => {
         const publicationYear = new Date(publication.published).getFullYear();
         if (!groupedPublications[publicationYear]) {
             groupedPublications[publicationYear] = [];
+            groupedYearsLocale[publicationYear] = (new Date(publicationYear, 0, 1)).toLocaleString(language, { year: 'numeric' });
         }
 
         groupedPublications[publicationYear].push(publication);
     });
-
-    const langInfo = getCurrentLanguage();
 
     return (
         <Box width="100%" {...props}>
@@ -40,7 +41,7 @@ const PublicationsList = ({ publications, ...props }: PublicationsListProps) => 
                 <Box key={year}>
                     <Flex justifyContent="flex-end">
                         <Heading as="h2" color={yearColor} size="xl" marginY={4}>
-                            {(new Date(year, 0, 1)).toLocaleString(langInfo.hrefLang, { year: 'numeric' })}
+                            {groupedYearsLocale[year]}
                         </Heading>
                     </Flex>
 
