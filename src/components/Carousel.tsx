@@ -10,6 +10,7 @@ import {
     useBreakpointValue
 } from '@chakra-ui/react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
+import { useI18next } from 'gatsby-plugin-react-i18next';
 
 import SwipableBox from './SwipableBox';
 
@@ -44,6 +45,7 @@ interface CarouselProps extends BoxProps {
 
 const Carousel = ({ children, direction = 'horizontal', itemsPerSlide = [1, 2, 3, 4, 5], gap = 10, ...props }: CarouselProps) => {
     const items = useBreakpointValue(itemsPerSlide) as number;
+    const { t, language } = useI18next();
 
     const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -91,8 +93,8 @@ const Carousel = ({ children, direction = 'horizontal', itemsPerSlide = [1, 2, 3
             ))}
 
             <IconButton
-                title='Previous slide'
-                aria-label="Previous slide"
+                title={t('carousel_left') as string}
+                aria-label={t('carousel_left') as string}
                 icon={<ChevronLeftIcon />}
                 onClick={handlePrevClick}
                 position="absolute"
@@ -102,8 +104,8 @@ const Carousel = ({ children, direction = 'horizontal', itemsPerSlide = [1, 2, 3
             />
 
             <IconButton
-                title='Next slide'
-                aria-label="Next slide"
+                title={t('carousel_right') as string}
+                aria-label={t('carousel_right') as string}
                 icon={<ChevronRightIcon />}
                 onClick={handleNextClick}
                 position="absolute"
@@ -117,7 +119,7 @@ const Carousel = ({ children, direction = 'horizontal', itemsPerSlide = [1, 2, 3
                     <Circle
                         key={`slide_circle_${index}`}
                         size={4}
-                        title={`Slide ${index + 1}`}
+                        title={t('carousel_dot', {slide_num: (index + 1).toLocaleString(language)}) as string}
                         bg={index === currentSlide ? useColorModeValue("gray.400", "gray.200") : 'transparent'}
                         borderColor={useColorModeValue("gray.400", "gray.200")}
                         borderWidth={2.5}

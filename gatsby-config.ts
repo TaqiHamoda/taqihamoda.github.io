@@ -9,21 +9,21 @@ const config: GatsbyConfig = {
         title: "My own personal website",
         description: "Welcome to my website!",
         siteUrl: siteUrl,
-        favicon: "🌱", // Uncomment the manifest plugin to use a file
+        favicon: "🌱", // Uncomment the manifest plugin to use a file and comment this line
     },
     plugins: [
         `gatsby-plugin-mdx`,
-        `gatsby-plugin-sitemap`,
         `gatsby-transformer-json`,
+        `gatsby-plugin-sitemap`,
         `gatsby-transformer-sharp`, // Needed for dynamic images
         {
             // Documentation: https://www.gatsbyjs.com/plugins/gatsby-plugin-react-i18next/?=gatsby%20plugin%20react%20i18n
             resolve: `gatsby-plugin-react-i18next`,
             options: {
                 localeJsonSourceName: `locales`, // name given to `gatsby-source-filesystem` plugin.
-                languages: ['ar', 'en', 'es'],
-                defaultLanguage: 'en',
-                fallbackLanguage: 'en',
+                languages: ["ar", "en", "es"],
+                defaultLanguage: "en",
+                fallbackLanguage: "en",
                 siteUrl: siteUrl,
                 // if you are using trailingSlash gatsby config include it here, as well (the default is 'always')
                 trailingSlash: "always",
@@ -37,12 +37,16 @@ const config: GatsbyConfig = {
                 },
                 pages: [
                     {
-                      matchPath: '/:lang?/(.*)',
-                      getLanguageFromPath: true,
-                      languages: ['ar', 'en', 'es']
-                    }
-                  ]
-            
+                        matchPath: "/:lang?/(.*)",
+                        getLanguageFromPath: true,
+                        languages: ["ar", "en", "es"],
+                    },
+                    {
+                        matchPath: "/404", // Exclude the 404 page so it isn't translated
+                        getLanguageFromPath: true,
+                        languages: ["en"],
+                    },
+                ],
             },
         },
         {

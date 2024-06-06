@@ -8,7 +8,7 @@
     "description": [
         ["en", "An open source robot management system. Previously known as O-CTCR."],
         ["es", "Un sistema de gestión de robots de código abierto. Anteriormente conocido como O-CTCR."],
-        ["ar", "نظام إدارة الروبوت مفتوح المصدر. كانت تُعرف سابقًا باسم او- سي.تي.سي.ار"]
+        ["ar", "نظام إدارة الروبوت متاح المصدر. كانت تُعرف سابقًا باسم او- سي.تي.سي.ار"]
     ],
     "image": "../../assets/images/projects/clave.gif",
     "link": "https://github.com/TaqiHamoda/Clave"

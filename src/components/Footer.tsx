@@ -6,6 +6,7 @@ import {
     Text,
     Flex,
 } from '@chakra-ui/react';
+import { useI18next } from 'gatsby-plugin-react-i18next';
 
 import getAllSocials from '../data/getAllSocials';
 import getAllFooterInfo from '../data/getAllFooterInfo';
@@ -20,9 +21,13 @@ interface FooterProps extends BoxProps {
 }
 
 const Footer = ({ firstname, surname, ...props }: FooterProps) => {
+    const { t, language } = useI18next();
+
     const infos = getAllFooterInfo();
     const socials = getAllSocials();
     const updateDate = getSiteBuildTime();
+
+    const updateYear = updateDate.toLocaleString(language, { year: 'numeric' });
 
     return (
         <Box as="footer" width="100%" padding={5} {...props}>
@@ -41,16 +46,20 @@ const Footer = ({ firstname, surname, ...props }: FooterProps) => {
             </Flex>
 
             <Text fontSize='xs' textAlign="center" marginBottom={4}>
-                Feel free to contact me at any time.
+                {t('footer_social') as string}
             </Text>
 
             <Flex gap={3} width='100%' justifyContent='center'>
                 <Text color='gray.500' fontSize='xs'>
-                    &copy; {updateDate.getFullYear()} {firstname} {surname}
+                    &copy; {updateYear} {firstname} {surname}
                 </Text>
 
                 <Text color='gray.500' fontSize='xs'>
-                    Last updated: {updateDate.toLocaleDateString()}
+                {t('footer_update') as string} {updateDate.toLocaleDateString(language, {
+                        year: 'numeric',
+                        month: 'long',
+                        day: '2-digit'
+                    })}
                 </Text>
 
                 {infos.map((info: any) => (

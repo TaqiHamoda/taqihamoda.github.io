@@ -5,9 +5,11 @@ import {
     IconButton,
     Code,
     Text,
+    Flex,
     useClipboard
 } from '@chakra-ui/react';
 import { CopyIcon, CheckIcon } from '@chakra-ui/icons';
+import { useI18next } from 'gatsby-plugin-react-i18next';
 
 
 interface CodeBlockProps extends BoxProps {
@@ -17,6 +19,7 @@ interface CodeBlockProps extends BoxProps {
 const CodeBlock = ({ title, children, ...props }: CodeBlockProps) => {
     const textInsideChildren = typeof children === 'string' ? children : '';
     const { hasCopied, onCopy } = useClipboard(textInsideChildren, 1000);
+    const { t } = useI18next();
 
     return (
         <Box
@@ -24,28 +27,29 @@ const CodeBlock = ({ title, children, ...props }: CodeBlockProps) => {
             maxWidth='100%'
             {...props}
         >
-            <Text
-                top={4}
-                as='b'
-                left='50%'
-                transform='translateX(-50%)'
-                position='absolute'
-                fontSize='sm'
+            <Flex
+                position="absolute"
+                top={0}
+                zIndex={1}
+                width='100%'
+                padding={4}
+                justifyContent="space-between"
+                alignItems="center"
             >
-                {title}
-            </Text>
 
-            <IconButton
-                top={2}
-                right={2}
-                position='absolute'
-                aria-label="Copy to clipboard"
-                title="Copy to clipboard"
-                icon={hasCopied ? <CheckIcon /> : <CopyIcon />}
-                onClick={onCopy}
-                colorScheme={hasCopied ? 'green' : 'blue'}
-                size="sm"
-            />
+                <Text as="b" fontSize="sm" color='gray.500'>
+                    {title}
+                </Text>
+
+                <IconButton
+                    aria-label={t('code_clipboard') as string}
+                    title={t('code_clipboard') as string}
+                    icon={hasCopied ? <CheckIcon /> : <CopyIcon />}
+                    onClick={onCopy}
+                    colorScheme={hasCopied ? 'green' : 'blue'}
+                    size="sm"
+                />
+            </Flex>
 
             <Code
                 display='block'
@@ -53,6 +57,7 @@ const CodeBlock = ({ title, children, ...props }: CodeBlockProps) => {
                 whiteSpace='pre'
                 overflowX='auto'
                 padding={4}
+                dir='ltr'
             >
                 <Box marginTop={10}>{children}</Box>
             </Code>

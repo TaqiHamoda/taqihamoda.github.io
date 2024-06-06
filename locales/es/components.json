@@ -5,11 +5,12 @@
     "code_clipboard": "Copiar al portapapeles",
     "navbar_theme": "Alternar tema",
     "footer_social": "Siéntete libre de contactarme en cualquier momento.",
-    "footer_update": "Ultima actualización en: {{update_date}}",
+    "footer_update": "Ultima actualización en:",
     "pub_arxiv": "arXiv",
     "pub_pdf": "PDF",
     "pub_publisher": "EDITOR",
     "pub_website": "SITIO WEB",
     "pub_abstract": "Alternar resumen",
-    "pub_bibtex": "CITA BibTeX"
+    "pub_bibtex": "BibTeX",
+    "pub_citation": "CITA BibTeX"
 }

@@ -5,11 +5,12 @@
     "code_clipboard": "Copy to clipboard",
     "navbar_theme": "Toggle Theme",
     "footer_social": "Feel free to contact me at any time.",
-    "footer_update": "Last updated on: {{update_date}}",
+    "footer_update": "Last updated on:",
     "pub_arxiv": "arXiv",
     "pub_pdf": "PDF",
     "pub_publisher": "PUBLISHER",
     "pub_website": "WEBSITE",
     "pub_abstract": "Toggle abstract",
-    "pub_bibtex": "BibTeX CITATION"
+    "pub_bibtex": "BibTeX",
+    "pub_citation": "BibTeX CITATION"
 }

@@ -8,6 +8,8 @@ import {
     useColorModeValue,
 } from '@chakra-ui/react';
 
+import getCurrentLanguage from '../data/getCurrentLanguage';
+
 import Publication from '../types/Publication';
 
 import PublicationCard from './PublicationCard';
@@ -30,13 +32,15 @@ const PublicationsList = ({ publications, ...props }: PublicationsListProps) => 
         groupedPublications[publicationYear].push(publication);
     });
 
+    const langInfo = getCurrentLanguage();
+
     return (
         <Box width="100%" {...props}>
             {Object.keys(groupedPublications).sort((a: any, b: any) => b - a).map((year: any) => (
                 <Box key={year}>
                     <Flex justifyContent="flex-end">
                         <Heading as="h2" color={yearColor} size="xl" marginY={4}>
-                            {year}
+                            {(new Date(year, 0, 1)).toLocaleString(langInfo.hrefLang, { year: 'numeric' })}
                         </Heading>
                     </Flex>
 

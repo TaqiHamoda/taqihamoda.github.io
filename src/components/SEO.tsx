@@ -20,7 +20,7 @@ const SEO = ({ title, description, path, langInfo, image = '', isLocalImage = fa
     const seo = {
         title: title || siteMetadata.title,
         description: description || siteMetadata.description,
-        url: path ? `${siteMetadata.siteUrl}/${path}` : siteMetadata.siteUrl,
+        url: path ? `${siteMetadata.siteUrl}${path}` : siteMetadata.siteUrl,
         image: isLocalImage && image ? `${siteMetadata.siteUrl}${image}` : image,
         favicon: siteMetadata.favicon,
     };
@@ -28,6 +28,7 @@ const SEO = ({ title, description, path, langInfo, image = '', isLocalImage = fa
     return (
         <>
             <html lang={langInfo.code} dir={langInfo.langDir} />
+            <link rel="alternate" href={seo.url} hrefLang={langInfo.hrefLang} />
 
             <title>{seo.title}</title>
             <meta name="title" content={seo.title} />

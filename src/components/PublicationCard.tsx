@@ -16,6 +16,9 @@ import {
     useBreakpointValue
 } from '@chakra-ui/react';
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
+import { useI18next } from 'gatsby-plugin-react-i18next';
+
+import getCurrentLanguage from '../data/getCurrentLanguage';
 
 import Publication from '../types/Publication';
 
@@ -33,6 +36,11 @@ const PublicationCard = ({ publication, ...props }: PublicationCardProps) => {
     const [showBibtex, setShowBibtex] = useState(false);
     const isSmallScreen = useBreakpointValue({ base: true, md: false });
 
+    const { t } = useI18next();
+
+    const langInfo = getCurrentLanguage();
+    const comma = langInfo.langDir === 'ltr' ? ',' : '،';
+
     const authors = publication.authors.map((author, index) => (
         <span key={index}>
             {author.tag === '@me' ? (
@@ -44,19 +52,20 @@ const PublicationCard = ({ publication, ...props }: PublicationCardProps) => {
             ) : (
                 <span>{author.name}</span>
             )}
-            {index < publication.authors.length - 1 && ', '}
+            {index < publication.authors.length - 1 && `${comma} `}
         </span>
     ));
 
     const links = [
-        { label: 'arXiv', href: publication.arxiv },
-        { label: 'PDF', href: publication.pdf },
-        { label: 'PUBLISHER', href: publication.url },
-        { label: 'WEBSITE', href: publication.website },
+        { label: t('pub_arxiv'), href: publication.arxiv },
+        { label: t('pub_pdf'), href: publication.pdf },
+        { label: t('pub_publisher'), href: publication.url },
+        { label: t('pub_website'), href: publication.website },
     ].filter(link => link.href);
 
     const publishedDate = new Date(publication.published);
-    const publishedMonth = publishedDate.toLocaleString('en-US', { month: 'long' });
+    const publishedMonth = publishedDate.toLocaleString(langInfo.hrefLang, { month: 'long' });
+    const publishedYear = publishedDate.toLocaleString(langInfo.hrefLang, { year: 'numeric' });
 
     return (
         <Card variant="outline" {...props}>
@@ -71,7 +80,7 @@ const PublicationCard = ({ publication, ...props }: PublicationCardProps) => {
                         maxQuality={360}
                         maxWidth={isSmallScreen ? "full" : "250px"}
                         marginBottom={isSmallScreen ? 4 : 0}
-                        marginRight={!isSmallScreen ? 4 : 0}
+                        marginEnd={!isSmallScreen ? 4 : 0}
                     />
 
                     <Flex width='full'>
@@ -83,8 +92,8 @@ const PublicationCard = ({ publication, ...props }: PublicationCardProps) => {
                                 {authors}
                             </Text>
                             <Text>
-                                <i>{publication.journal}</i>, <i>{publication.doi}</i>, {publishedMonth}{' '}
-                                {publishedDate.getFullYear()}
+                                <i>{publication.journal}</i>{comma} <i>{publication.doi}</i>{comma} {publishedMonth}{' '}
+                                {publishedYear}
                             </Text>
 
                             <Spacer />
@@ -113,18 +122,18 @@ const PublicationCard = ({ publication, ...props }: PublicationCardProps) => {
                                         variant="outline"
                                         colorScheme={showBibtex ? 'teal' : 'gray'}
                                         onClick={() => setShowBibtex(!showBibtex)}>
-                                        BibTeX
+                                        {t('pub_bibtex')}
                                     </Button>
                                 )}
                             </Flex>
                         </Flex>
 
                         <IconButton
-                            aria-label="Toggle abstract"
-                            title="Toggle abstract"
+                            aria-label={t('pub_abstract') as string}
+                            title={t('pub_abstract') as string}
                             icon={showAbstract ? <ChevronUpIcon /> : <ChevronDownIcon />}
                             onClick={() => setShowAbstract(!showAbstract)}
-                            marginLeft={2}
+                            marginStart={2}
                         />
                     </Flex>
                 </Flex>
@@ -144,7 +153,7 @@ const PublicationCard = ({ publication, ...props }: PublicationCardProps) => {
                 {showBibtex && (
                     <>
                         <StrongDivider marginY={5} />
-                        <CodeBlock title='BibTeX CITATION'>{publication.bibtex}</CodeBlock>
+                        <CodeBlock title={t('pub_citation') as string}>{publication.bibtex}</CodeBlock>
                     </>
                 )}
             </CardBody>

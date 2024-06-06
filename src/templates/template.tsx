@@ -61,14 +61,16 @@ export default function PageTemplate({ data, children, pageContext }: PageTempla
                         float="right"
                         width='full'
                         maxWidth={isSmallScreen ? 'full' : '360px'}
-                        marginLeft={isSmallScreen ? 0 : 5}
+                        marginStart={isSmallScreen ? 0 : 5}
                     >
                         <Img
                             preload
+                            rel='preload'
                             maxQuality={720}
                             width='full'
                             image={data.mdx.frontmatter.profile_image}
-                            alt={"Profile Picture"}
+                            alt={t('prof_pic')}
+                            title={t('prof_pic') as string}
                         />
 
                         <VStack marginY={5} width='max-content'>
@@ -91,9 +93,9 @@ export default function PageTemplate({ data, children, pageContext }: PageTempla
                 <OptimalBox lazyLoad delay width='full'>
                     <SectionHeader
                         marginTop={5}
-                        subtext="projects am proud to be a part of :)"
+                        subtext={t('projects_subtext') as string}
                     >
-                        projects
+                        {t('projects_title')}
                     </SectionHeader>
 
                     <Carousel marginY={5} itemsPerSlide={[1, 1, 2, 3, 3]} direction={'horizontal'}>
@@ -109,9 +111,9 @@ export default function PageTemplate({ data, children, pageContext }: PageTempla
                 {/* Publications Section */}
                 <OptimalBox lazyLoad delay width='full'>
                     <SectionHeader
-                        subtext="please reach out with any questions or concerns"
+                        subtext={t('pub_subtext') as string}
                     >
-                        publications
+                        {t('pub_title')}
                     </SectionHeader>
 
                     <PublicationsList marginBottom={5} publications={publications} />

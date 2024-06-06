@@ -4,6 +4,7 @@ import Author from "../types/Author";
 import Publication from "../types/Publication";
 
 import getAllAuthors from "./getAllAuthors";
+import getAllAbstracts from "./getAllAbstracts";
 import getAllSchemas from "./getAllSchemas";
 import parseSchema from "../utils/parseSchema";
 
@@ -41,6 +42,7 @@ export default function getAllPublications() {
     `);
 
     const authors = getAllAuthors();
+    const abstracts = getAllAbstracts();
 
     const schema = getAllSchemas()["bibliograaphy"];
     const parsed_data = parseSchema(schema, data.allBibliographyJson.nodes);
@@ -66,7 +68,7 @@ export default function getAllPublications() {
             journal: publication.journal,
             doi: publication.doi,
             authors: pub_authors,
-            abstract: publication.abstract,
+            abstract: abstracts[publication.doi].abstract,
             image: publication.preview,
             arxiv: publication.arxiv,
             pdf: publication.pdf.publicURL,

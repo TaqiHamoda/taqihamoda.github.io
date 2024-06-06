@@ -5,11 +5,12 @@
     "code_clipboard": "انسخه",
     "navbar_theme": "غير لون الخلفية",
     "footer_social": "ممكن تتواصل معايا في أي وقت.",
-    "footer_update": "أخر تحديث كان بتاريخ: {{update_date}}",
+    "footer_update": "أخر تحديث كان بتاريخ",
     "pub_arxiv": "أرشيف",
     "pub_pdf": "بي.دي.إف",
     "pub_publisher": "مجلة النشر",
     "pub_website": "الموقع",
     "pub_abstract": "الملخص",
-    "pub_bibtex": "اقتباس ببتيكس"
+    "pub_bibtex": "ببتيكس",
+    "pub_citation": "اقتباس ببتيكس"
 }
