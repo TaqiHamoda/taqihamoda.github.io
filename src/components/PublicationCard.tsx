@@ -16,7 +16,7 @@ import {
     useBreakpointValue
 } from '@chakra-ui/react';
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
-import { useI18next } from 'gatsby-plugin-react-i18next';
+import { useTranslation } from 'react-i18next';
 
 import getCurrentLanguage from '../data/getCurrentLanguage';
 
@@ -36,7 +36,7 @@ const PublicationCard = ({ publication, ...props }: PublicationCardProps) => {
     const [showBibtex, setShowBibtex] = useState(false);
     const isSmallScreen = useBreakpointValue({ base: true, md: false });
 
-    const { t } = useI18next();
+    const { t } = useTranslation();
 
     const langInfo = getCurrentLanguage();
     const comma = langInfo.langDir === 'ltr' ? ',' : '،';

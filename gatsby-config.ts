@@ -17,39 +17,6 @@ const config: GatsbyConfig = {
         `gatsby-plugin-sitemap`,
         `gatsby-transformer-sharp`, // Needed for dynamic images
         {
-            // Documentation: https://www.gatsbyjs.com/plugins/gatsby-plugin-react-i18next/?=gatsby%20plugin%20react%20i18n
-            resolve: `gatsby-plugin-react-i18next`,
-            options: {
-                localeJsonSourceName: `locales`, // name given to `gatsby-source-filesystem` plugin.
-                languages: ["ar", "en", "es"],
-                defaultLanguage: "en",
-                fallbackLanguage: "en",
-                siteUrl: siteUrl,
-                // if you are using trailingSlash gatsby config include it here, as well (the default is 'always')
-                trailingSlash: "always",
-                // you can pass any i18next options
-                i18nextOptions: {
-                    interpolation: {
-                        escapeValue: false, // not needed for react as it escapes by default
-                    },
-                    keySeparator: false,
-                    nsSeparator: false,
-                },
-                pages: [
-                    {
-                        matchPath: "/:lang?/(.*)",
-                        getLanguageFromPath: true,
-                        languages: ["ar", "en", "es"],
-                    },
-                    {
-                        matchPath: "/404", // Exclude the 404 page so it isn't translated
-                        getLanguageFromPath: true,
-                        languages: ["en"],
-                    },
-                ],
-            },
-        },
-        {
             resolve: `gatsby-plugin-sharp`,
             options: {
                 // Documentation: https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-plugin-image/
@@ -107,13 +74,6 @@ const config: GatsbyConfig = {
             options: {
                 name: `data`,
                 path: `${__dirname}/data`,
-            },
-        },
-        {
-            resolve: `gatsby-source-filesystem`,
-            options: {
-                name: `locales`,
-                path: `${__dirname}/locales`,
             },
         },
         {

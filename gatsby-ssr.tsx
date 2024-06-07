@@ -14,10 +14,4 @@ export const onRenderBody: GatsbySSR['onRenderBody'] = ({ setPreBodyComponents }
   ])
 };
 
-export const wrapPageElement: GatsbySSR['wrapPageElement'] = ({ element, props }) => {
-  const langInfo: any = props.pageContext.i18n;
-
-  return (
-     <WrapPageElement element={element} lang={langInfo.language} />
-  );
-};
+export const wrapPageElement: GatsbySSR['wrapPageElement'] = WrapPageElement;

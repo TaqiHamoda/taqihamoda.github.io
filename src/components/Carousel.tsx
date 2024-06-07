@@ -10,7 +10,9 @@ import {
     useBreakpointValue
 } from '@chakra-ui/react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
-import { useI18next } from 'gatsby-plugin-react-i18next';
+import { useTranslation } from 'react-i18next';
+
+import getCurrentLanguage from '../data/getCurrentLanguage';
 
 import SwipableBox from './SwipableBox';
 
@@ -45,16 +47,26 @@ interface CarouselProps extends BoxProps {
 
 const Carousel = ({ children, direction = 'horizontal', itemsPerSlide = [1, 2, 3, 4, 5], gap = 10, ...props }: CarouselProps) => {
     const items = useBreakpointValue(itemsPerSlide) as number;
-    const { t, language } = useI18next();
+    const { t } = useTranslation();
+
+    const langInfo = getCurrentLanguage();
 
     const [currentSlide, setCurrentSlide] = useState(0);
 
     const handlePrevClick = () => {
-        setCurrentSlide((currentSlide - 1 + Math.ceil(children.length / items)) % Math.ceil(children.length / items));
+        if (langInfo.langDir == 'rtl') {
+            setCurrentSlide((currentSlide + 1) % Math.ceil(children.length / items));
+        } else {
+            setCurrentSlide((currentSlide - 1 + Math.ceil(children.length / items)) % Math.ceil(children.length / items));
+        }
     };
 
     const handleNextClick = () => {
-        setCurrentSlide((currentSlide + 1) % Math.ceil(children.length / items));
+        if (langInfo.langDir == 'rtl') {
+            setCurrentSlide((currentSlide - 1 + Math.ceil(children.length / items)) % Math.ceil(children.length / items));
+        } else {
+            setCurrentSlide((currentSlide + 1) % Math.ceil(children.length / items));
+        }
     };
 
     const handleDotClick = (index: number) => {
@@ -119,7 +131,7 @@ const Carousel = ({ children, direction = 'horizontal', itemsPerSlide = [1, 2, 3
                     <Circle
                         key={`slide_circle_${index}`}
                         size={4}
-                        title={t('carousel_dot', {slide_num: (index + 1).toLocaleString(language)}) as string}
+                        title={t('carousel_dot', {slide_num: (index + 1).toLocaleString(langInfo.hrefLang)}) as string}
                         bg={index === currentSlide ? useColorModeValue("gray.400", "gray.200") : 'transparent'}
                         borderColor={useColorModeValue("gray.400", "gray.200")}
                         borderWidth={2.5}

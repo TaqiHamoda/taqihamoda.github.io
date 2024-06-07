@@ -11,7 +11,7 @@ import {
     VStack,
     HStack
 } from '@chakra-ui/react';
-import { useTranslation } from 'gatsby-plugin-react-i18next';
+import { useTranslation } from "react-i18next";
 
 import useIsScreenSize from "../utils/useIsScreenSize";
 
@@ -140,20 +140,12 @@ query($id: String!, $language: String!) {
         }
       }
     }
-    locales: allLocale(filter: {language: {eq: $language}}) {
-      edges {
-        node {
-          ns
-          data
-          language
+    translations: allLocales(filter: {language: {eq: $language}, ns: {in: ["components", "index"]}}) {
+        nodes {
+            ns
+            language
+            data
         }
-      }
-    }
-    languagesJson(code: {eq: $language}) {
-        code
-        hrefLang
-        langDir
-        name
     }
 }`;
 
@@ -161,7 +153,6 @@ export const Head = ({ location, params, data, pageContext }: any) => {
     return (
         <SEO
             isLocalImage
-            langInfo={data.languagesJson}
             title={pageContext.frontmatter.title}
             description={pageContext.frontmatter.description}
             image={data.mdx.frontmatter.profile_image.publicURL}

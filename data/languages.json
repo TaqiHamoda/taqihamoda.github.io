@@ -1,5 +1,11 @@
 [
     {
+        "code": "ar",
+        "name": "عربي",
+        "hrefLang": "ar-EG",
+        "langDir": "rtl"
+    },
+    {
         "code": "en",
         "name": "English",
         "hrefLang": "en-CA",
@@ -10,11 +16,5 @@
         "name": "Español",
         "hrefLang": "es-MX",
         "langDir": "ltr"
-    },
-    {
-        "code": "ar",
-        "name": "عربي",
-        "hrefLang": "ar-EG",
-        "langDir": "rtl"
     }
 ]

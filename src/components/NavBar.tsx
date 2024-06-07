@@ -13,15 +13,17 @@ import {
     useColorModeValue,
 } from '@chakra-ui/react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
-import { useI18next } from 'gatsby-plugin-react-i18next';
+import { useTranslation } from 'react-i18next';
 
 import getAllLanguages from '../data/getAllLanguages';
+import getCurrentLanguage from '../data/getCurrentLanguage';
 
 
 const NavBar = (props: FlexProps) => {
     const { toggleColorMode } = useColorMode();
-    const { language, languages, t, changeLanguage } = useI18next();
+    const { t } = useTranslation();
 
+    const langInfo = getCurrentLanguage();
     const langsInfo = getAllLanguages();
 
     return (
@@ -42,13 +44,13 @@ const NavBar = (props: FlexProps) => {
 
             <Menu>
                 <MenuButton as={Button} marginRight={2}>
-                    {langsInfo[language].name}
+                    {langInfo.name}
                 </MenuButton>
                 <MenuList>
-                    {languages.filter((lang) => lang !== language).map((lang) => (
+                    {Object.keys(langsInfo).filter((lang: string) => lang !== langInfo.code).map((lang: string) => (
                         <MenuItem key={lang} onClick={(e) => {
                             e.preventDefault();
-                            changeLanguage(lang);
+                            // changeLanguage(lang);
                           }}>
                             {langsInfo[lang].name}
                         </MenuItem>

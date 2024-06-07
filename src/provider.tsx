@@ -1,17 +1,18 @@
 import React from "react";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import type { WrapPageElementBrowserArgs } from "gatsby";
+
 import { customTheme } from "./theme";
+import { initializeI18n } from "./utils/initializeI18n";
+import getCurrentLanguage from "./data/getCurrentLanguage";
 
-import getAllLanguages from "./data/getAllLanguages";
 
+export const WrapPageElement = ({ element, props }: any) => {
+    const language: string = props.pageContext.language;
+    const translations = props.data.translations.nodes;
 
-interface WrapPageElementProps extends Pick<WrapPageElementBrowserArgs, 'element'> {
-    lang?: string;
-};
-
-export const WrapPageElement = ({ element, lang = 'en' }: WrapPageElementProps) => {
-    const langInfo = getAllLanguages()[lang];
+    initializeI18n(language, translations);
+ 
+    const langInfo = getCurrentLanguage();
 
     return (
         // Or ChakraBaseProvider if you only want to compile the default Chakra theme tokens
@@ -19,4 +20,4 @@ export const WrapPageElement = ({ element, lang = 'en' }: WrapPageElementProps) 
             {element}
         </ChakraProvider>
     );
-};
+ };

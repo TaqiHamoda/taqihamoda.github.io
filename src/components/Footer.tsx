@@ -6,7 +6,7 @@ import {
     Text,
     Flex,
 } from '@chakra-ui/react';
-import { useI18next } from 'gatsby-plugin-react-i18next';
+import { useTranslation } from 'react-i18next';
 
 import getAllSocials from '../data/getAllSocials';
 import getAllFooterInfo from '../data/getAllFooterInfo';
@@ -21,14 +21,14 @@ interface FooterProps extends BoxProps {
 }
 
 const Footer = ({ firstname, surname, ...props }: FooterProps) => {
-    const { t, language } = useI18next();
+    const { t, i18n } = useTranslation();
 
     const infos = getAllFooterInfo();
     const socials = getAllSocials();
     const updateDate = getSiteBuildTime();
 
-    const updateYear = updateDate.toLocaleString(language, { year: 'numeric' });
-    const buildDate = updateDate.toLocaleDateString(language, {
+    const updateYear = updateDate.toLocaleString(i18n.language, { year: 'numeric' });
+    const buildDate = updateDate.toLocaleDateString(i18n.language, {
         year: 'numeric',
         month: 'long',
         day: '2-digit'

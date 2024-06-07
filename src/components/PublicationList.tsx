@@ -7,11 +7,10 @@ import {
     SimpleGrid,
     useColorModeValue,
 } from '@chakra-ui/react';
-import { useI18next } from 'gatsby-plugin-react-i18next';
 
 import Publication from '../types/Publication';
-
 import PublicationCard from './PublicationCard';
+import getCurrentLanguage from '../data/getCurrentLanguage';
 
 
 interface PublicationsListProps extends BoxProps {
@@ -20,7 +19,7 @@ interface PublicationsListProps extends BoxProps {
 
 const PublicationsList = ({ publications, ...props }: PublicationsListProps) => {
     const yearColor = useColorModeValue('gray.400', 'gray.600');
-    const { language } = useI18next();
+    const langInfo = getCurrentLanguage();
 
     const groupedPublications: { [key: number]: Publication[] } = {};
     const groupedYearsLocale: { [key: number]: string } = {};
@@ -29,7 +28,7 @@ const PublicationsList = ({ publications, ...props }: PublicationsListProps) => 
         const publicationYear = new Date(publication.published).getFullYear();
         if (!groupedPublications[publicationYear]) {
             groupedPublications[publicationYear] = [];
-            groupedYearsLocale[publicationYear] = (new Date(publicationYear, 0, 1)).toLocaleString(language, { year: 'numeric' });
+            groupedYearsLocale[publicationYear] = (new Date(publicationYear, 0, 1)).toLocaleString(langInfo.hrefLang, { year: 'numeric' });
         }
 
         groupedPublications[publicationYear].push(publication);

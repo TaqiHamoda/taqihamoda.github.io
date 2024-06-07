@@ -1,26 +1,107 @@
-const path = require("path");
-const template = path.resolve(`./src/templates/template.tsx`);
+// API Documentation: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/
+import path from "path";
+import { locales, getTranslations } from "./locales/i18n";
 
-interface createPagesProps {
-    graphql: any;
-    actions: any;
-    reporter: any;
-}
+const mdxRootFolder = "/content";
 
-exports.createPages = async ({
-    graphql,
+// Load Translations
+exports.sourceNodes = async ({
     actions,
-    reporter,
-}: createPagesProps) => {
+    createNodeId,
+    createContentDigest,
+}: any) => {
+    const { createNode, createTypes } = actions;
+
+    const typeDefs = `
+        type locales implements Node {
+            id: ID!
+            ns: String!
+            language: String!
+            data: JSON!
+        }
+    `;
+    createTypes(typeDefs);
+
+    getTranslations().forEach((trans) => {
+        const node: any = {
+            id: createNodeId(`locales-${trans.filePath}`),
+            children: [],
+            internal: {
+                type: "locales",
+                contentDigest: createContentDigest(trans.data),
+                contentFilePath: trans.filePath,
+            },
+            ns: trans.ns,
+            language: trans.language,
+            data: trans.data,
+        };
+
+        createNode(node);
+    });
+};
+
+// Add the language info to the node of each MDX file in the database
+exports.onCreateNode = ({ node, actions }: any) => {
+    const { createNodeField } = actions;
+
+    switch (node.internal.type) {
+        case "Mdx": {
+            const name = path
+                .basename(node.internal.contentFilePath, `.mdx`)
+                .split(".");
+
+            // If there is no language code in the filename, use the default language
+            const defaultLang = Object.keys(locales)
+                .filter((l) => locales[l].default)
+                .pop();
+            const lang = name.length > 1 ? name[1] : (defaultLang as string);
+
+            createNodeField({ node, name: "language", value: lang });
+
+            // Create a localized slug based on the language and the file path
+            const relativeFilePath = path
+                .dirname(node.internal.contentFilePath)
+                .split(mdxRootFolder)
+                .pop();
+            const slug =
+                name[0] === "index"
+                    ? relativeFilePath
+                    : `${relativeFilePath}/${name[0]}`;
+            const localizedSlug = locales[lang].default
+                ? `/${slug}`
+                : `/${lang}/${slug}`;
+            const localizedPath =
+                localizedSlug === `/`
+                    ? localizedSlug
+                    : localizedSlug.replace(/\/$/, ``);
+
+            createNodeField({ node, name: "path", value: localizedPath });
+            break;
+        }
+        case "LanguagesJson": {
+            // Add the default field to the database nodes
+            createNodeField({ node, name: "isDefault", value: locales[node.code].default });
+            break;
+        }
+        default: {
+            break;
+        }
+    }
+};
+
+exports.createPages = async ({ graphql, actions }: any) => {
     const { createPage } = actions;
+
+    const template = path.resolve(`./src/templates/template.tsx`);
 
     const result = await graphql(`
         query {
             allMdx {
                 nodes {
                     id
-                    frontmatter {
-                        slug
+                    fields {
+                        path
+                        language
                     }
                     internal {
                         contentFilePath
@@ -31,23 +112,19 @@ exports.createPages = async ({
     `);
 
     if (result.errors) {
-        reporter.panicOnBuild("Error loading MDX result", result.errors);
+        console.error(result.errors);
+        return;
     }
 
-    // Create blog post pages.
-    const posts: any[] = result.data.allMdx.nodes;
+    result.data.allMdx.nodes.forEach((node: any) => {
+        // Use the fields created in exports.onCreateNode
+        const id = node.id;
+        const language = node.fields.language;
 
-    // you'll call `createPage` for each result
-    posts.forEach((node) => {
         createPage({
-            // As mentioned above you could also query something else like frontmatter.title above and use a helper function
-            // like slugify to create a slug
-            path: node.frontmatter.slug,
-            // Provide the path to the MDX content file so webpack can pick it up and transform it into JSX
+            path: node.fields.path,
             component: `${template}?__contentFilePath=${node.internal.contentFilePath}`,
-            // You can use the values in this context in
-            // our page layout component
-            context: { id: node.id },
+            context: { id, language },
         });
     });
 };

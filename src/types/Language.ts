@@ -3,4 +3,5 @@ export default interface Language {
     name: string;
     hrefLang: string;
     langDir: string;
+    isDefault: boolean;
 };

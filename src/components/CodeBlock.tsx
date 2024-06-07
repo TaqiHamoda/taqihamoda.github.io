@@ -9,7 +9,7 @@ import {
     useClipboard
 } from '@chakra-ui/react';
 import { CopyIcon, CheckIcon } from '@chakra-ui/icons';
-import { useI18next } from 'gatsby-plugin-react-i18next';
+import { useTranslation } from 'react-i18next';
 
 
 interface CodeBlockProps extends BoxProps {
@@ -19,7 +19,7 @@ interface CodeBlockProps extends BoxProps {
 const CodeBlock = ({ title, children, ...props }: CodeBlockProps) => {
     const textInsideChildren = typeof children === 'string' ? children : '';
     const { hasCopied, onCopy } = useClipboard(textInsideChildren, 1000);
-    const { t } = useI18next();
+    const { t } = useTranslation();
 
     return (
         <Box
