@@ -140,7 +140,13 @@ query($id: String!, $language: String!) {
         }
       }
     }
-    translations: allLocales(filter: {language: {eq: $language}, ns: {in: ["components", "index"]}}) {
+    languagesJson(code: {eq: $language}) {
+        name
+        langDir
+        code
+        hrefLang
+    }
+    translations: allLocale(filter: {language: {eq: $language}, ns: {in: ["components", "index"]}}) {
         nodes {
             ns
             language
@@ -153,6 +159,7 @@ export const Head = ({ location, params, data, pageContext }: any) => {
     return (
         <SEO
             isLocalImage
+            langInfo={data.languagesJson}
             title={pageContext.frontmatter.title}
             description={pageContext.frontmatter.description}
             image={data.mdx.frontmatter.profile_image.publicURL}

@@ -1,8 +1,45 @@
 // API Documentation: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/
+import fs from "fs";
 import path from "path";
-import { locales, getTranslations } from "./locales/i18n";
+
+import { locales } from "./locales/i18n";
+
 
 const mdxRootFolder = "/content";
+const localeFolder = "./locales";
+
+interface Translation {
+    ns: string;
+    filePath: string;
+    language: string;
+    data: any;
+};
+
+function getTranslations() {
+    const translations: Translation[] = [];
+    const translationDir = `${__dirname}/${localeFolder}/translations`;
+
+    for (const lang in locales) {
+        fs.readdirSync(`${translationDir}/${lang}`).forEach((file) => {
+            const filePath = path.join(translationDir, lang, file);
+            const stat = fs.statSync(filePath);
+
+            if (stat.isFile() && path.extname(file) === ".json") {
+                const fileContents = fs.readFileSync(filePath, "utf8");
+                const data = JSON.parse(fileContents);
+
+                translations.push({
+                    language: lang,
+                    ns: path.basename(filePath, ".json"),
+                    data,
+                    filePath,
+                });
+            }
+        });
+    }
+
+    return translations;
+}
 
 // Load Translations
 exports.sourceNodes = async ({
@@ -13,7 +50,7 @@ exports.sourceNodes = async ({
     const { createNode, createTypes } = actions;
 
     const typeDefs = `
-        type locales implements Node {
+        type locale implements Node {
             id: ID!
             ns: String!
             language: String!
@@ -24,10 +61,10 @@ exports.sourceNodes = async ({
 
     getTranslations().forEach((trans) => {
         const node: any = {
-            id: createNodeId(`locales-${trans.filePath}`),
+            id: createNodeId(`locale-${trans.filePath}`),
             children: [],
             internal: {
-                type: "locales",
+                type: "locale",
                 contentDigest: createContentDigest(trans.data),
                 contentFilePath: trans.filePath,
             },

@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+    Box,
     Flex,
     FlexProps,
     IconButton,
@@ -14,6 +15,8 @@ import {
 } from '@chakra-ui/react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { useTranslation } from 'react-i18next';
+
+import LocalizedLink from './LocalizedLink';
 
 import getAllLanguages from '../data/getAllLanguages';
 import getCurrentLanguage from '../data/getCurrentLanguage';
@@ -48,11 +51,13 @@ const NavBar = (props: FlexProps) => {
                 </MenuButton>
                 <MenuList>
                     {Object.keys(langsInfo).filter((lang: string) => lang !== langInfo.code).map((lang: string) => (
-                        <MenuItem key={lang} onClick={(e) => {
-                            e.preventDefault();
-                            // changeLanguage(lang);
-                          }}>
-                            {langsInfo[lang].name}
+                        <MenuItem key={lang} onClick={() => {
+                            // This will simulate a click on the LocalizedLink
+                            document.getElementById(`navbar-localized-link-${lang}`)?.click();
+                        }}>
+                            <LocalizedLink id={`navbar-localized-link-${lang}`} language={lang}>
+                                {langsInfo[lang].name}
+                            </LocalizedLink>
                         </MenuItem>
                     ))}
                 </MenuList>
