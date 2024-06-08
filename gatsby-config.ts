@@ -1,5 +1,8 @@
 import type { GatsbyConfig } from "gatsby";
 
+export const mdxRootFolder = "/content";
+export const localeFolder = "./locales";
+
 const siteUrl = `https://taqihamoda.github.io/`;
 
 const config: GatsbyConfig = {
@@ -66,7 +69,7 @@ const config: GatsbyConfig = {
             resolve: `gatsby-source-filesystem`,
             options: {
                 name: `content`,
-                path: `${__dirname}/content`,
+                path: `${__dirname}${mdxRootFolder}`,
             },
         },
         {

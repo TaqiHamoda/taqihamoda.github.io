@@ -34,7 +34,7 @@ const ProjectCard = ({ project, ...props }: ProjectCardProps) => {
             {...props}
         >
             <CardBody>
-                <Img image={project.image} alt={project.name} maxQuality={480}/>
+                <Img preload image={project.image} alt={project.name} maxQuality={480}/>
 
                 <Flex justifyContent={'center'} marginY={2.5}>
                     <Heading as='h2' fontSize="xl" marginTop={2}>

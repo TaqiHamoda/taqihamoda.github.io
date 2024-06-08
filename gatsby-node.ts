@@ -3,10 +3,8 @@ import fs from "fs";
 import path from "path";
 
 import { locales } from "./locales/i18n";
+import { mdxRootFolder, localeFolder } from "./gatsby-config";
 
-
-const mdxRootFolder = "/content";
-const localeFolder = "./locales";
 
 interface Translation {
     ns: string;
@@ -161,7 +159,7 @@ exports.createPages = async ({ graphql, actions }: any) => {
         createPage({
             path: node.fields.path,
             component: `${template}?__contentFilePath=${node.internal.contentFilePath}`,
-            context: { id, language },
+            context: { id, language, supportedLanguages: Object.keys(locales) },
         });
     });
 };

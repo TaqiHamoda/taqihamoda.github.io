@@ -50,8 +50,9 @@ const Carousel = ({ children, direction = 'horizontal', itemsPerSlide = [1, 2, 3
     const { t } = useTranslation();
 
     const langInfo = getCurrentLanguage();
-
     const [currentSlide, setCurrentSlide] = useState(0);
+
+    const fadeDir = langInfo.langDir === 'ltr' ? 1 : -1;
 
     const handlePrevClick = () => {
         if (langInfo.langDir == 'rtl') {
@@ -95,8 +96,8 @@ const Carousel = ({ children, direction = 'horizontal', itemsPerSlide = [1, 2, 3
                 >
                     <SlideFade
                         in={index === currentSlide}
-                        offsetY={direction === 'vertical' ? (index < currentSlide ? -20 : 20) : 0}
-                        offsetX={direction === 'horizontal' ? (index < currentSlide ? -20 : 20) : 0}
+                        offsetY={fadeDir*(direction === 'vertical' ? (index < currentSlide ? -20 : 20) : 0)}
+                        offsetX={fadeDir*(direction === 'horizontal' ? (index < currentSlide ? -20 : 20) : 0)}
                         transition={{ enter: { duration: 1 }, exit: { duration: 0 } }}
                     >
                         {slide}
