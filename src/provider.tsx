@@ -46,7 +46,7 @@ export const WrapPageElement = ({ element, props }: any) => {
         const isLanguageSupported = supportedLanguages.includes(browserLanguage);
 
         if (browserLanguage !== language && isLanguageSupported && !props.location.state?.routed) {
-            const newUrl = getLocalizedPath('', browserLanguage);
+            const newUrl = getLocalizedPath('', browserLanguage);  // Empty string indicated get the localized path for the current page
             navigate(newUrl, { replace: true });
 
             return null; // Render a blank page until the redirect is complete
