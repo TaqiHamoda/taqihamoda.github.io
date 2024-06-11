@@ -1,8 +1,4 @@
-interface locale {
-    default: boolean;
-};
-
-export const locales: { [key: string]: locale } = {
+exports.locales = {
     ar: {
         default: false,
     },

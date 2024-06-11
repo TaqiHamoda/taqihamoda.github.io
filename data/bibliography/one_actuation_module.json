@@ -19,13 +19,36 @@
         ["es", "diseño", "fuente abierta", "robótica continua", "control de par"],
         ["ar", "تصميم", "متاح المصدر", "الروبوتات المستمرة", "التحكم في دوران الموتور"]
     ],
+    "authors": ["RGrassman", "CShentu", "@me", "PTD", "JBK"],
     "published": "2024-01-19",
     "doi": "10.3389/frobt.2024.1272403",
-    "url": "https://www.frontiersin.org/articles/10.3389/frobt.2024.1272403/full",
     "pdf": "../../assets/pdf/Open Continuum Robotics – One Actuation Module to Create them All.pdf",
-    "website": "https://www.opencontinuumrobotics.com/",
-    "arxiv": "https://arxiv.org/abs/2304.11850",
     "preview": "../../assets/images/publications/one-actuation-module.gif",
-    "authors": ["RGrassman", "CShentu", "@me", "PTD", "JBK"],
+    "links": [
+        {
+            "name": [
+                ["en", "arXiv"],
+                ["es", "arXiv"],
+                ["ar", "أرشيف"]
+            ],
+            "link": "https://arxiv.org/abs/2304.11850"
+        },
+        {
+            "name": [
+                ["en", "WEBSITE"],
+                ["es", "SITIO WEB"],
+                ["ar", "الموقع"]
+            ],
+            "link": "https://www.opencontinuumrobotics.com/"
+        },
+        {
+            "name": [
+                ["en", "PUBLISHER"],
+                ["es", "EDITOR"],
+                ["ar", "مجلة النشر"]
+            ],
+            "link": "https://www.frontiersin.org/articles/10.3389/frobt.2024.1272403/full"
+        }
+    ],
     "bibtex": "@ARTICLE{10.3389/frobt.2024.1272403,\n\tAUTHOR={Grassmann, Reinhard M. and Shentu, Chengnan and Hamoda, Taqi and Dewi, Puspita Triana and Burgner-Kahrs, Jessica},\n\tTITLE={Open continuum robotics–one actuation module to create them all},\n\tJOURNAL={Frontiers in Robotics and AI},\n\tVOLUME={11},\n\tYEAR={2024},\n\tURL={https://www.frontiersin.org/articles/10.3389/frobt.2024.1272403},\n\tDOI={10.3389/frobt.2024.1272403},\n\tISSN={2296-9144}\n}"
 }

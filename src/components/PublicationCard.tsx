@@ -56,12 +56,8 @@ const PublicationCard = ({ publication, ...props }: PublicationCardProps) => {
         </span>
     ));
 
-    const links = [
-        { label: t('pub_arxiv'), href: publication.arxiv },
-        { label: t('pub_pdf'), href: publication.pdf },
-        { label: t('pub_publisher'), href: publication.url },
-        { label: t('pub_website'), href: publication.website },
-    ].filter(link => link.href);
+    const links = publication.links.map(link => {return { label: link.name, href: link.link }; });
+    links.push({ label: t('pub_pdf'), href: publication.pdf });
 
     const publishedDate = new Date(publication.published);
     const publishedMonth = publishedDate.toLocaleString(langInfo.hrefLang, { month: 'long' });

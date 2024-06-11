@@ -1,4 +1,8 @@
+export interface SchemaProp {
+    [key: string]: SchemaProp
+};
+
 export default interface Schema {
     schema: string;
-    locale_properties: Set<string>;
+    locale_properties: SchemaProp;
 };

@@ -16,7 +16,6 @@ export default function getAllPublications() {
         query {
             allBibliographyJson(sort: { published: DESC }) {
                 nodes {
-                    arxiv
                     authors
                     bibtex
                     doi
@@ -24,11 +23,13 @@ export default function getAllPublications() {
                     pdf {
                         publicURL
                     }
+                    links {
+                        name
+                        link
+                    }
                     published
                     publisher
                     title
-                    url
-                    website
                     keywords
                     preview {
                         publicURL
@@ -70,10 +71,8 @@ export default function getAllPublications() {
             authors: pub_authors,
             abstract: abstracts[publication.doi].abstract,
             image: publication.preview,
-            arxiv: publication.arxiv,
             pdf: publication.pdf.publicURL,
-            url: publication.url,
-            website: publication.website,
+            links: publication.links,
             bibtex: publication.bibtex,
             keywords: publication.keywords,
         });

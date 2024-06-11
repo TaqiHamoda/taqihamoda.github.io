@@ -2,8 +2,8 @@
 import fs from "fs";
 import path from "path";
 
-import { locales } from "./locales/i18n";
 import { mdxRootFolder, localeFolder } from "./gatsby-config";
+const locales = require(`${localeFolder}/i18n.ts`).locales;
 
 
 interface Translation {
@@ -15,7 +15,7 @@ interface Translation {
 
 function getTranslations() {
     const translations: Translation[] = [];
-    const translationDir = `${__dirname}/${localeFolder}/translations`;
+    const translationDir = `${localeFolder}/translations`;
 
     for (const lang in locales) {
         fs.readdirSync(`${translationDir}/${lang}`).forEach((file) => {

@@ -9,12 +9,12 @@
         ]
     },
     {
-        "name": "al-folio theme",
-        "url": "https://github.com/alshedivat/al-folio",
+        "name": "Chakra UI",
+        "url": "https://chakra-ui.com/",
         "description": [
-            ["en", "Inspired by al-folio theme"],
-            ["es", "Inspirado en el tema al-folio"],
-            ["ar", "تصميم الموقع مستوحى من مشروع الفوليو"]
+            ["en", "Designed with Chakra UI"],
+            ["es", "Diseñado con Chakra UI"],
+            ["ar", "مصمم بتشاكرا يو.أي"]
         ]
     },
     {

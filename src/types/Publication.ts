@@ -10,10 +10,8 @@ export default interface Publication {
     authors: Author[];
     abstract: string;
     image: ImgType;
-    arxiv: string;
     pdf: string;
-    website: string;
-    url: string;
+    links: { name: string, link: string }[];
     bibtex: string;
     keywords: string[];
 };

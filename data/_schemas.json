@@ -17,7 +17,7 @@
     },
     {
         "schema": "bibliograaphy",
-        "locale_properties": ["title", "publisher", "journal", "keywords"]
+        "locale_properties": ["title", "publisher", "journal", "keywords", "links::name"]
     },
     {
         "schema": "abstracts",
