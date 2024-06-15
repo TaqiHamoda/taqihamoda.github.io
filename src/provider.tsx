@@ -5,10 +5,10 @@ import { I18nextProvider } from 'react-i18next';
 import { navigate } from "gatsby";
 
 import { customTheme } from "./theme";
-import {getLocalizedPath} from "./components/LocalizedLink";
+import { getLocalizedPath } from "./components/LocalizedLink";
 
 
-export const WrapPageElement = ({ element, props }: any) => {
+export const WrapPageElement = ({ element, props }: any): any => {
     // No data or translations available
     if (!props.data) {
         return (
