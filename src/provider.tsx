@@ -9,8 +9,8 @@ import { getLocalizedPath } from "./components/LocalizedLink";
 
 
 export const WrapPageElement = ({ element, props }: any): any => {
-    // No data or translations available
-    if (!props.data) {
+    // No language data or translations available
+    if (!props.pageContext.language || !props.pageContext.translation) {
         return (
             <ChakraProvider theme={customTheme}>
                 {element}
@@ -19,13 +19,10 @@ export const WrapPageElement = ({ element, props }: any): any => {
     }
 
     const language: string = props.pageContext.language;
-    const translations: any[] = props.data.translations.nodes;
+    const translation: any = props.pageContext.translation;
     const supportedLanguages: string[] = props.pageContext.supportedLanguages;
 
     const i18n = i18next.createInstance();
-
-    let translation: any = {};
-    translations.forEach(trans => (translation = { ...translation, ...trans.data }));
 
     i18n.init({
         resources: {

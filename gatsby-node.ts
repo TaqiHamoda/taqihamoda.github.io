@@ -29,6 +29,7 @@ exports.onCreateNode = ({ node, actions, createNodeId, createContentDigest }: an
             const name = path
                 .basename(node.internal.contentFilePath, `.mdx`)
                 .split(".");
+            createNodeField({ node, name: "name", value: name[0] });
 
             // If there is no language code in the filename, use the default language
             const defaultLang = locales.defaultLanguage;
@@ -103,6 +104,7 @@ exports.createPages = async ({ graphql, actions }: any) => {
                 nodes {
                     id
                     fields {
+                        name
                         path
                         language
                     }
@@ -119,10 +121,25 @@ exports.createPages = async ({ graphql, actions }: any) => {
         return;
     }
 
-    result.data.allMdx.nodes.forEach((node: any) => {
+    result.data.allMdx.nodes.forEach(async (node: any) => {
         // Use the fields created in exports.onCreateNode
         const id = node.id;
         const language = node.fields.language;
+
+        const translations = await graphql(`
+            query ($language: String!, $page_name: String!) {
+                allLocale(filter: {language: {eq: $language}, ns: {in: ["common", $page_name]}}) {
+                    nodes {
+                        ns
+                        language
+                        data
+                    }
+                }
+            }
+        `, { language, page_name: node.fields.name });
+
+        let translation: any = {};
+        translations.data.allLocale.nodes.forEach((trans: any) => (translation = { ...translation, ...trans.data }));
 
         createPage({
             path: node.fields.path,
@@ -130,6 +147,7 @@ exports.createPages = async ({ graphql, actions }: any) => {
             context: {
                 id,
                 language,
+                translation,
                 supportedLanguages: locales.languagesAvailable,
             },
         });
