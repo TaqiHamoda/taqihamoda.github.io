@@ -1,51 +1,13 @@
 // API Documentation: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/
-import fs from "fs";
 import path from "path";
 
-import { mdxRootFolder, localeFolder } from "./gatsby-config";
-const locales = require(`${localeFolder}/i18n.ts`).locales;
+import { mdxRootFolder, localeFolder, translationsFolder } from "./gatsby-config";
+const locales = require(`${localeFolder}/i18n.ts`).configuration;
 
 
-interface Translation {
-    ns: string;
-    filePath: string;
-    language: string;
-    data: any;
-};
-
-function getTranslations() {
-    const translations: Translation[] = [];
-    const translationDir = `${localeFolder}/translations`;
-
-    for (const lang in locales) {
-        fs.readdirSync(`${translationDir}/${lang}`).forEach((file) => {
-            const filePath = path.join(translationDir, lang, file);
-            const stat = fs.statSync(filePath);
-
-            if (stat.isFile() && path.extname(file) === ".json") {
-                const fileContents = fs.readFileSync(filePath, "utf8");
-                const data = JSON.parse(fileContents);
-
-                translations.push({
-                    language: lang,
-                    ns: path.basename(filePath, ".json"),
-                    data,
-                    filePath,
-                });
-            }
-        });
-    }
-
-    return translations;
-}
-
-// Load Translations
-exports.sourceNodes = async ({
-    actions,
-    createNodeId,
-    createContentDigest,
-}: any) => {
-    const { createNode, createTypes } = actions;
+// Add locale type definitions
+exports.sourceNodes = async ({ actions }: any) => {
+    const { createTypes } = actions;
 
     const typeDefs = `
         type locale implements Node {
@@ -56,28 +18,11 @@ exports.sourceNodes = async ({
         }
     `;
     createTypes(typeDefs);
-
-    getTranslations().forEach((trans) => {
-        const node: any = {
-            id: createNodeId(`locale-${trans.filePath}`),
-            children: [],
-            internal: {
-                type: "locale",
-                contentDigest: createContentDigest(trans.data),
-                contentFilePath: trans.filePath,
-            },
-            ns: trans.ns,
-            language: trans.language,
-            data: trans.data,
-        };
-
-        createNode(node);
-    });
 };
 
 // Add the language info to the node of each MDX file in the database
-exports.onCreateNode = ({ node, actions }: any) => {
-    const { createNodeField } = actions;
+exports.onCreateNode = ({ node, actions, createNodeId, createContentDigest }: any) => {
+    const { createNodeField, createNode } = actions;
 
     switch (node.internal.type) {
         case "Mdx": {
@@ -86,9 +31,7 @@ exports.onCreateNode = ({ node, actions }: any) => {
                 .split(".");
 
             // If there is no language code in the filename, use the default language
-            const defaultLang = Object.keys(locales)
-                .filter((l) => locales[l].default)
-                .pop();
+            const defaultLang = locales.defaultLanguage;
             const lang = name.length > 1 ? name[1] : (defaultLang as string);
 
             createNodeField({ node, name: "language", value: lang });
@@ -102,9 +45,8 @@ exports.onCreateNode = ({ node, actions }: any) => {
                 name[0] === "index"
                     ? relativeFilePath
                     : `${relativeFilePath}/${name[0]}`;
-            const localizedSlug = locales[lang].default
-                ? `/${slug}`
-                : `/${lang}/${slug}`;
+            const localizedSlug =
+                lang === defaultLang ? `/${slug}` : `/${lang}/${slug}`;
             const localizedPath =
                 localizedSlug === `/`
                     ? localizedSlug
@@ -113,9 +55,35 @@ exports.onCreateNode = ({ node, actions }: any) => {
             createNodeField({ node, name: "path", value: localizedPath });
             break;
         }
+        case "File": {
+            if (node.absolutePath.startsWith(translationsFolder)) {
+                const lang = node.relativeDirectory;
+                const ns = path.basename(node.relativePath, ".json");
+                const data = JSON.parse(node.internal.content);
+    
+                const localeNode: any = {
+                    id: createNodeId(`locale-${node.id}`),
+                    children: [],
+                    internal: {
+                        type: "locale",
+                        contentDigest: createContentDigest(data),
+                        contentFilePath: node.absolutePath,
+                    },
+                    ns,
+                    language: lang,
+                    data,
+                };
+    
+                createNode(localeNode);
+            }
+        }
         case "LanguagesJson": {
             // Add the default field to the database nodes
-            createNodeField({ node, name: "isDefault", value: locales[node.code].default });
+            createNodeField({
+                node,
+                name: "isDefault",
+                value: node.code === locales.defaultLanguage,
+            });
             break;
         }
         default: {
@@ -159,7 +127,11 @@ exports.createPages = async ({ graphql, actions }: any) => {
         createPage({
             path: node.fields.path,
             component: `${template}?__contentFilePath=${node.internal.contentFilePath}`,
-            context: { id, language, supportedLanguages: Object.keys(locales) },
+            context: {
+                id,
+                language,
+                supportedLanguages: locales.languagesAvailable,
+            },
         });
     });
 };
