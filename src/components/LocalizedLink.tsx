@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, GatsbyLinkProps } from 'gatsby';
 
+import getCurrentLanguage from '../data/getCurrentLanguage';
 import getAllLanguages from '../data/getAllLanguages';
 
 
@@ -14,10 +15,14 @@ export function getLocalizedPath(href: string, language: string) {
         href = currentPagePath;
     }
 
+    if (!language) {
+        language = getCurrentLanguage().code;
+    }
+
     const pathParts = href.split('/');
     const currentLanguage = pathParts[1];
 
-    if (Object.keys(langsInfo).includes(currentLanguage)) {
+    if (langsInfo[currentLanguage]) {
         pathParts.splice(1, 1);
         href = pathParts.join('/');
     }
@@ -30,7 +35,7 @@ export function getLocalizedPath(href: string, language: string) {
 }
 
 interface LocalizedLinkProps extends Omit<GatsbyLinkProps<any>, 'to' | 'ref'> {
-    language: string;
+    language?: string;
     to?: string;
     ref?: any;
 }
@@ -38,7 +43,7 @@ interface LocalizedLinkProps extends Omit<GatsbyLinkProps<any>, 'to' | 'ref'> {
 const LocalizedLink = ({ language, to, state, ...props }: LocalizedLinkProps) => {
     return (
         <Link
-            to={getLocalizedPath(to as string, language)}
+            to={getLocalizedPath(to as string, language as string)}
             state={{ ...state, routed: true }}
             {...props}
         />

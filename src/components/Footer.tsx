@@ -15,12 +15,9 @@ import getSiteBuildTime from '../data/getSiteBuildTime';
 import SVGIcon from './SVGIcon';
 
 
-interface FooterProps extends BoxProps {
-    firstname: string;
-    surname: string;
-}
+interface FooterProps extends BoxProps { };
 
-const Footer = ({ firstname, surname, ...props }: FooterProps) => {
+const Footer = ({ ...props }: FooterProps) => {
     const { t, i18n } = useTranslation();
 
     const infos = getAllFooterInfo();
@@ -56,7 +53,7 @@ const Footer = ({ firstname, surname, ...props }: FooterProps) => {
 
             <Flex gap={3} width='100%' justifyContent='center'>
                 <Text color='gray.500' fontSize='xs'>
-                    &copy; {updateYear} {firstname} {surname}
+                    &copy; {updateYear} {t('firstname') as string} {t('surname') as string}
                 </Text>
 
                 <Text color='gray.500' fontSize='xs'>

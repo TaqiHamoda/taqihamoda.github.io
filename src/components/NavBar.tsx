@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    Box,
+    Text,
     Flex,
     FlexProps,
     IconButton,
@@ -22,7 +22,11 @@ import getAllLanguages from '../data/getAllLanguages';
 import getCurrentLanguage from '../data/getCurrentLanguage';
 
 
-const NavBar = (props: FlexProps) => {
+interface NavBarProps extends FlexProps {
+    showHomepage?: boolean;
+}
+
+const NavBar = ({ showHomepage, ...props }: NavBarProps) => {
     const { toggleColorMode } = useColorMode();
     const { t } = useTranslation();
 
@@ -42,6 +46,11 @@ const NavBar = (props: FlexProps) => {
             alignItems='center'
             {...props}
         >
+            { showHomepage &&
+                <LocalizedLink to='/'>
+                    {<Text as='h1' fontSize='xl'><Text as='b'>{t('firstname')}</Text> {t('surname')} </Text>}
+                </LocalizedLink>
+            }
 
             <Spacer />
 

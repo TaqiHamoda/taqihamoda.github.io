@@ -1,9 +1,14 @@
 // API Documentation: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/
 import path from "path";
 
-import { mdxRootFolder, localeFolder, translationsFolder } from "./gatsby-config";
+import {
+    mdxRootFolder,
+    localeFolder,
+    translationsFolder,
+} from "./gatsby-config";
 const locales = require(`${localeFolder}/i18n.ts`).configuration;
 
+const templateFolder = path.resolve(`./src/templates`);
 
 // Add locale type definitions
 exports.sourceNodes = async ({ actions }: any) => {
@@ -21,7 +26,12 @@ exports.sourceNodes = async ({ actions }: any) => {
 };
 
 // Add the language info to the node of each MDX file in the database
-exports.onCreateNode = ({ node, actions, createNodeId, createContentDigest }: any) => {
+exports.onCreateNode = ({
+    node,
+    actions,
+    createNodeId,
+    createContentDigest,
+}: any) => {
     const { createNodeField, createNode } = actions;
 
     switch (node.internal.type) {
@@ -29,7 +39,6 @@ exports.onCreateNode = ({ node, actions, createNodeId, createContentDigest }: an
             const name = path
                 .basename(node.internal.contentFilePath, `.mdx`)
                 .split(".");
-            createNodeField({ node, name: "name", value: name[0] });
 
             // If there is no language code in the filename, use the default language
             const defaultLang = locales.defaultLanguage;
@@ -45,7 +54,7 @@ exports.onCreateNode = ({ node, actions, createNodeId, createContentDigest }: an
             const slug =
                 name[0] === "index"
                     ? relativeFilePath
-                    : `${relativeFilePath}/${name[0]}`;
+                    : `${relativeFilePath}${name[0]}`;
             const localizedSlug =
                 lang === defaultLang ? `/${slug}` : `/${lang}/${slug}`;
             const localizedPath =
@@ -61,7 +70,7 @@ exports.onCreateNode = ({ node, actions, createNodeId, createContentDigest }: an
                 const lang = node.relativeDirectory;
                 const ns = path.basename(node.relativePath, ".json");
                 const data = JSON.parse(node.internal.content);
-    
+
                 const localeNode: any = {
                     id: createNodeId(`locale-${node.id}`),
                     children: [],
@@ -74,7 +83,7 @@ exports.onCreateNode = ({ node, actions, createNodeId, createContentDigest }: an
                     language: lang,
                     data,
                 };
-    
+
                 createNode(localeNode);
             }
         }
@@ -96,15 +105,15 @@ exports.onCreateNode = ({ node, actions, createNodeId, createContentDigest }: an
 exports.createPages = async ({ graphql, actions }: any) => {
     const { createPage } = actions;
 
-    const template = path.resolve(`./src/templates/template.tsx`);
-
     const result = await graphql(`
         query {
             allMdx {
                 nodes {
                     id
+                    frontmatter {
+                        page_type
+                    }
                     fields {
-                        name
                         path
                         language
                     }
@@ -121,35 +130,54 @@ exports.createPages = async ({ graphql, actions }: any) => {
         return;
     }
 
-    result.data.allMdx.nodes.forEach(async (node: any) => {
+    for (const node of result.data.allMdx.nodes) {
         // Use the fields created in exports.onCreateNode
         const id = node.id;
         const language = node.fields.language;
+        const page_type = node.frontmatter.page_type;
 
-        const translations = await graphql(`
-            query ($language: String!, $page_name: String!) {
-                allLocale(filter: {language: {eq: $language}, ns: {in: ["common", $page_name]}}) {
+        const languagesInfo = await graphql(
+            `query ($language: String!, $page_type: String!) {
+                allLocale(
+                    filter: {
+                        language: { eq: $language }
+                        ns: { in: ["common", $page_type] }
+                    }
+                ) {
                     nodes {
                         ns
                         language
                         data
                     }
                 }
+                languagesJson(code: { eq: $language }) {
+                    name
+                    langDir
+                    code
+                    hrefLang
+                }
             }
-        `, { language, page_name: node.fields.name });
+            `,
+            { language, page_type }
+        );
 
         let translation: any = {};
-        translations.data.allLocale.nodes.forEach((trans: any) => (translation = { ...translation, ...trans.data }));
+        languagesInfo.data.allLocale.nodes.forEach(
+            (trans: any) => (translation = { ...translation, ...trans.data })
+        );
+
+        const langInfo = languagesInfo.data.languagesJson;
+        const template = `${templateFolder}/${node.frontmatter.page_type}.tsx`;
 
         createPage({
             path: node.fields.path,
             component: `${template}?__contentFilePath=${node.internal.contentFilePath}`,
             context: {
                 id,
-                language,
+                language: langInfo,
                 translation,
                 supportedLanguages: locales.languagesAvailable,
             },
         });
-    });
+    }
 };
