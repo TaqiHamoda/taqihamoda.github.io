@@ -62,7 +62,8 @@ exports.onCreateNode = ({
                     ? localizedSlug
                     : localizedSlug.replace(/\/$/, ``);
 
-            createNodeField({ node, name: "path", value: localizedPath });
+            createNodeField({ node, name: "path", value: `/${slug}` });
+            createNodeField({ node, name: "localizedPath", value: localizedPath });
             break;
         }
         case "File": {
@@ -103,7 +104,7 @@ exports.onCreateNode = ({
 };
 
 exports.createPages = async ({ graphql, actions }: any) => {
-    const { createPage } = actions;
+    const { createPage, createRedirect } = actions;
 
     const result = await graphql(`
         query {
@@ -111,10 +112,11 @@ exports.createPages = async ({ graphql, actions }: any) => {
                 nodes {
                     id
                     frontmatter {
-                        page_type
+                        pageType
                     }
                     fields {
                         path
+                        localizedPath
                         language
                     }
                     internal {
@@ -134,14 +136,14 @@ exports.createPages = async ({ graphql, actions }: any) => {
         // Use the fields created in exports.onCreateNode
         const id = node.id;
         const language = node.fields.language;
-        const page_type = node.frontmatter.page_type;
+        const pageType = node.frontmatter.pageType;
 
         const languagesInfo = await graphql(
-            `query ($language: String!, $page_type: String!) {
+            `query ($language: String!, $pageType: String!) {
                 allLocale(
                     filter: {
                         language: { eq: $language }
-                        ns: { in: ["common", $page_type] }
+                        ns: { in: ["common", $pageType] }
                     }
                 ) {
                     nodes {
@@ -158,7 +160,7 @@ exports.createPages = async ({ graphql, actions }: any) => {
                 }
             }
             `,
-            { language, page_type }
+            { language, pageType }
         );
 
         let translation: any = {};
@@ -167,16 +169,17 @@ exports.createPages = async ({ graphql, actions }: any) => {
         );
 
         const langInfo = languagesInfo.data.languagesJson;
-        const template = `${templateFolder}/${node.frontmatter.page_type}.tsx`;
+        const template = `${templateFolder}/${node.frontmatter.pageType}.tsx`;
 
         createPage({
-            path: node.fields.path,
+            path: node.fields.localizedPath,
             component: `${template}?__contentFilePath=${node.internal.contentFilePath}`,
             context: {
                 id,
+                pageType,
                 language: langInfo,
                 translation,
-                supportedLanguages: locales.languagesAvailable,
+                supportedLanguages: locales.languagesAvailable
             },
         });
     }

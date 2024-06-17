@@ -64,7 +64,7 @@ const IndexTemplate = ({ data, children, pageContext }: IndexTemplateProps) => {
                         rel='preload'
                         maxQuality={720}
                         width='full'
-                        image={data.mdx.frontmatter.profile_image}
+                        image={data.mdx.frontmatter.profileImage}
                         alt={t('prof_pic')}
                         title={t('prof_pic') as string}
                     />
@@ -123,7 +123,7 @@ export const query = graphql`
 query($id: String!) {
     mdx(id: {eq: $id}) {
       frontmatter {
-        profile_image {
+        profileImage {
             publicURL
             childImageSharp {
                 gatsbyImageData
@@ -140,7 +140,7 @@ export const Head = ({ location, params, data, pageContext }: any) => {
             langInfo={pageContext.language}
             title={pageContext.frontmatter.title}
             description={pageContext.frontmatter.description}
-            image={data.mdx.frontmatter.profile_image.publicURL}
+            image={data.mdx.frontmatter.profileImage.publicURL}
             path={location.pathname}
         />
     );
