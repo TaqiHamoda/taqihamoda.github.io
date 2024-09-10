@@ -19,17 +19,17 @@ interface WrapPageElementProps extends WrapPageElementBrowserArgs {
         pageContext: {
             language?: Language;
             translation?: any;
-            supportedLanguages: string[];
-            pageType: string;
+            supportedLanguages?: string[];
+            pageType?: string;
         };
     };
 }
 
 export const WrapPageElement = ({ element, props }: WrapPageElementProps): any => {
-    const { language, translation, supportedLanguages } = props.pageContext;
+    const { language, translation, supportedLanguages, pageType } = props.pageContext;
 
     // No language data or translations available
-    if (!language || !translation) {
+    if (!language || !translation || !supportedLanguages || !pageType) {
         return (
             <ChakraProvider theme={customTheme}>
                 {element}
@@ -43,7 +43,7 @@ export const WrapPageElement = ({ element, props }: WrapPageElementProps): any =
         const isLanguageSupported = supportedLanguages.includes(browserLanguage);
 
         // Replace URL in browser with 404
-        if (props.pageContext.pageType === "404" && !window.location.pathname.endsWith('404/')) {
+        if (pageType === "404" && !window.location.pathname.endsWith('404/')) {
             const newUrl = getLocalizedPath('/404', browserLanguage);
             navigate(newUrl, { replace: true });
         } else if (browserLanguage !== language.code && isLanguageSupported && !props.location.state?.routed) {

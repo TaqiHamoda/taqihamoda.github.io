@@ -54,7 +54,7 @@ const IndexTemplate = ({ data, children, pageContext }: IndexTemplateProps) => {
 
             <Box>
                 <Box
-                    float="right"
+                    float='right'
                     width='full'
                     maxWidth={isSmallScreen ? 'full' : '360px'}
                     marginStart={isSmallScreen ? 0 : 5}
@@ -94,7 +94,7 @@ const IndexTemplate = ({ data, children, pageContext }: IndexTemplateProps) => {
                     {t('projects_title')}
                 </SectionHeader>
 
-                <Carousel marginY={5} itemsPerSlide={[1, 1, 2, 3, 3]} direction={'horizontal'}>
+                <Carousel marginY={5} itemsPerSlide={[1, 1, 2, 3, 3]} direction='horizontal'>
                     {projects.map(project => (
                         <ProjectCard
                             key={project.name}
@@ -116,7 +116,7 @@ const IndexTemplate = ({ data, children, pageContext }: IndexTemplateProps) => {
             </OptimalBox>
         </Page>
     );
-}
+};
 export default IndexTemplate;
 
 export const query = graphql`

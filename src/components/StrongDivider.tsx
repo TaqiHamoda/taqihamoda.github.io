@@ -8,7 +8,7 @@ import {
 const StrongDivider = (props: Omit<BoxProps, 'children'>) => {
     return (
         <Box
-            bgColor={'gray.500'}
+            bgColor='gray.500'
             height='1px'
             width='100%'
             {...props}

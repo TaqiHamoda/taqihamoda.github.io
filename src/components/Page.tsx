@@ -20,7 +20,7 @@ const Page = ({ isIndex, ...props }: PageProps) => (
 
         <VStack
             paddingTop='5rem'
-            paddingX={'15px'}
+            paddingX='15px'
             maxWidth='1200px'
             {...props}
         />

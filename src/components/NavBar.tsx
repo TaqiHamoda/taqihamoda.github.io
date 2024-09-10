@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+    Box,
     Text,
     Flex,
     FlexProps,
@@ -35,21 +36,28 @@ const NavBar = ({ showHomepage, ...props }: NavBarProps) => {
 
     return (
         <Flex
-            as="nav"
+            as='nav'
             width='100%'
             position="fixed"
-            paddingX={3}
             gap={2}
-            backgroundColor={useColorModeValue('lightgray', 'gray.900')}
-            opacity={0.75}
             zIndex={999}
             alignItems='center'
             {...props}
         >
-            { showHomepage &&
-                <LocalizedLink to='/'>
-                    {<Text as='h1' fontSize='xl'><Text as='b'>{t('firstname')}</Text> {t('surname')} </Text>}
-                </LocalizedLink>
+            <Flex
+                position='absolute'
+                width='full'
+                height='full'
+                opacity={0.85}
+                backgroundColor={useColorModeValue('lightgray', 'gray.900')}
+            />
+
+            {showHomepage &&
+                <Box zIndex={1} marginStart={5}>
+                    <LocalizedLink to='/'>
+                        {<Text as='h1' fontSize='xl'><Text as='b'>{t('firstname')}</Text> {t('surname')} </Text>}
+                    </LocalizedLink>
+                </Box>
             }
 
             <Spacer />
@@ -77,7 +85,8 @@ const NavBar = ({ showHomepage, ...props }: NavBarProps) => {
                 alignSelf="center"
                 aria-label={t('navbar_theme') as string}
                 title={t('navbar_theme') as string}
-                margin={2}
+                marginY={2}
+                marginEnd={5}
                 icon={useColorModeValue(<SunIcon />, <MoonIcon />)}
             />
         </Flex>
