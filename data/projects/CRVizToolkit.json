@@ -10,6 +10,6 @@
         ["es", "El kit de herramientas de visualización de robótica continua (Útiles de CRVis). Desarrollé la versión Python."],
         ["ar", "مجموعة أدوات لتصوير الروبوتات المستمرة (أدوات سي.ار.فيز). صنعت و طورت نسخة بايثون."]
     ],
-    "image": "../../assets/images/projects/tdcr_viz.png",
+    "image": "../../assets/images/projects/tdcr_viz.jpg",
     "link": "https://github.com/ContinuumRoboticsLab/CRVisToolkit"
 }

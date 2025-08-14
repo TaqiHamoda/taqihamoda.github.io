@@ -1,0 +1,15 @@
+{
+    "name": [
+        ["en", "UWMM Detection"],
+        ["es", "Detección de MMS"],
+        ["ar", "كاشف الذخائر المائية"]
+    ],
+    "year": 2024,
+    "description": [
+        ["en", "Baseline Model for Underwater Military Munitions (UWMM) Detection."],
+        ["es", "Modelo de referencia para la detección de municiones militares submarinas (MMS)."],
+        ["ar", "نموذج أساسي للكشف عن الذخائر العسكرية تحت الماء."]
+    ],
+    "image": "../../assets/images/projects/uwmm_baseline.jpg",
+    "link": "https://github.com/CIRS-Girona/uwmm-baseline"
+}

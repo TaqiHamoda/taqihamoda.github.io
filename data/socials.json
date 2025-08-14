@@ -16,5 +16,14 @@
         ],
         "url": "https://www.linkedin.com/in/taqi-hamoda",
         "icon": "../assets/images/socials/linkedin.svg"
+    },
+    {
+        "name": [
+            ["en", "Google Scholar"],
+            ["es", "Google Académico"],
+            ["ar", "الباحث العلمي من جوجل"]
+        ],
+        "url": "https://scholar.google.com/citations?user=iAL1ZGMAAAAJ",
+        "icon": "../assets/images/socials/scholar.svg"
     }
 ]

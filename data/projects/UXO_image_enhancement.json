@@ -1,0 +1,15 @@
+{
+    "name": [
+        ["en", "UXO Image Enhancement"],
+        ["es", "Mejora de imágenes de ASE"],
+        ["ar", "تحسين صور الذخائر"]
+    ],
+    "year": 2025,
+    "description": [
+        ["en", "A Python script for enhancing images of unexploded ordnance (UXO) with a configurable pipeline."],
+        ["es", "Un script de Python para mejorar imágenes de artefactos sin explotar (ASE) con un pipeline configurable."],
+        ["ar", "برنامج بايثون مصمم لتحسين صور الذخائر غير المنفجرة من خلال مسار متعدد المراحل قابل للتكوين."]
+    ],
+    "image": "../../assets/images/projects/UXO_image_enhancement.jpg",
+    "link": "https://github.com/CIRS-Girona/uxo-image-enhancement"
+}

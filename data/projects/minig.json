@@ -1,0 +1,15 @@
+{
+    "name": [
+        ["en", "Mini-Girona I-AUV"],
+        ["es", "Mini-Girona I-AUV"],
+        ["ar", "ميني جيرونا"]
+    ],
+    "year": 2025,
+    "description": [
+        ["en", "The Mini-Girona I-AUV is designed to enhance accessibility in marine robotics education."],
+        ["es", "El Mini-Girona I-AUV está diseñado para mejorar la accesibilidad en la educación de robótica marina."],
+        ["ar", "تم تصميم الميني جيرونا لتعزيز إمكانية الوصول في تعليم الروبوتات البحرية."]
+    ],
+    "image": "../../assets/images/projects/minig.jpg",
+    "link": "https://web.archive.org/web/20250723095821/https://ifrosmaster.org/minigirona-at-rami-2025-a-story-of-grit-innovation-and-team-spirit#expand"
+}

@@ -16,7 +16,7 @@
         "locale_properties": ["name", "description"]
     },
     {
-        "schema": "bibliograaphy",
+        "schema": "bibliography",
         "locale_properties": ["title", "publisher", "journal", "keywords", "links::name"]
     },
     {

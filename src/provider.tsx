@@ -10,7 +10,7 @@ import Language from "./types/Language";
 
 
 interface WrapPageElementProps extends WrapPageElementBrowserArgs {
-    props: WrapPageElementBrowserArgs['props'] &  {
+    props: WrapPageElementBrowserArgs['props'] & {
         location: {
             state?: {
                 routed?: boolean;
@@ -71,7 +71,6 @@ export const WrapPageElement = ({ element, props }: WrapPageElementProps): any =
 
     return (
         <I18nextProvider i18n={i18n}>
-            {/* // Or ChakraBaseProvider if you only want to compile the default Chakra theme tokens */}
             <ChakraProvider theme={extendTheme(customTheme, { direction: language.langDir })}>
                 {element}
             </ChakraProvider>

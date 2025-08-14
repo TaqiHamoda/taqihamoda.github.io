@@ -43,8 +43,8 @@
         },
         {
             "name": [
-                ["en", "PUBLISHER"],
-                ["es", "EDITOR"],
+                ["en", "PUBLICATION"],
+                ["es", "PUBLICACIÓN"],
                 ["ar", "مجلة النشر"]
             ],
             "link": "https://www.frontiersin.org/articles/10.3389/frobt.2024.1272403/full"

@@ -45,7 +45,7 @@ export default function getAllPublications() {
     const authors = getAllAuthors();
     const abstracts = getAllAbstracts();
 
-    const schema = getAllSchemas()["bibliograaphy"];
+    const schema = getAllSchemas()["bibliography"];
     const parsed_data = parseSchema(schema, data.allBibliographyJson.nodes);
 
     parsed_data.forEach((publication: any) => {
