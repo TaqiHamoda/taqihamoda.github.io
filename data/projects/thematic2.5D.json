@@ -1,0 +1,15 @@
+{
+    "name": [
+        ["en", "Thematic2.5D"],
+        ["es", "Thematic2.5D"],
+        ["ar", "ثيماتيك 2.5 دي"]
+    ],
+    "year": 2024,
+    "description": [
+        ["en", "A Toolkit for Evaluating 2D and 3D Feature Effects in Supervised Classification."],
+        ["es", "Un Kit de Herramientas para Evaluar los Efectos de Características 2D y 3D en la Clasificación Supervisada."],
+        ["ar", "مجموعة أدوات لتقييم تأثيرات الميزات ثنائية وثلاثية الأبعاد في التصنيف المُراقب."]
+    ],
+    "image": "../../assets/images/projects/thematic2.5D.jpg",
+    "link": "https://github.com/CIRS-Girona/Thematic2.5D"
+}

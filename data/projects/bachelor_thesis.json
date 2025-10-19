@@ -1,0 +1,15 @@
+{
+    "name": [
+        ["en", "Bachelor Thesis"],
+        ["es", "Trabajo de Fin de Grado"],
+        ["ar", "رسالة البكالوريوس"]
+    ],
+    "year": 2024,
+    "description": [
+        ["en", "From Milliseconds to Microseconds: Optimizing the Static Forward Kinematics of CTCRs"],
+        ["es", "De Milisegundos a Microsegundos: Optimización de la Cinématica Directa Estática de los CTCRs"],
+        ["ar", "من الميلي ثانية إلى الميكرو ثانية: تحسين الحركيات الأمامية الساكنة لـس.ت.س.ر"]
+    ],
+    "image": "../../assets/images/projects/bachelor_thesis.jpg",
+    "link": "https://github.com/TaqiHamoda/Bachelor-Thesis"
+}
