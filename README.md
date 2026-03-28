@@ -28,7 +28,7 @@ However, once you look past the UI and move into the codebase, you will find whe
 
 * **Keep It Simple Stupid 😘**: The codebase is specifically written with the main goal of being easy to read and understand. No convoluted abstractions, confusing spaghetti code, or esoteric one-liners. Every single line of code was written such that it makes sense. The goal is for this engine to be so easy to modify and customize that anyone can fork it and make it their own.
 
-* **Less Bloat 🤢**: I am extremely averse to third-party libraries and dependency bloat. Outside of the main frameworks (i.e. React, Chakra UI, Gatsby, i18n, MDX.js), you will find that all the functionality present is implemented from scratch instead of being outsources. This keeps the project lean, secure, and easy to grow and maintain.
+* **Less Bloat 🤢**: I am extremely averse to third-party libraries and dependency bloat. Outside of the main frameworks (i.e. React, Chakra UI, Gatsby, i18n, MDX.js), you will find that all the functionality present is implemented from scratch instead of being outsourced. This keeps the project lean, secure, and easy to grow and maintain.
 
 * **Universal by Design 😶**: It might be hard to believe, but the vast majority of people live in a country where English is not the primary language spoken (I know, I know, crazy stuff). As such, it was a must for the engine to not only support internationalization but to actively promote it in its internal design and usage. After all, if this website is to feel like home, it shouldn't just look cozy, it should also sound familiar.
 
