@@ -6,8 +6,6 @@ A lean, mean, data-driven portfolio engine machine 🏍 (built with Gatsby, Chak
 
 This engine is designed to help you carve out your own little corner of the internet without making you want to pull your hair out in the process.
 
----
-
 ## 💡 Why I Built This
 
 Most portfolio engines out there (and there are a lot of them, sorry for creating another) feel overly convoluted in their design. They try to do everything leaving the user with unnecessary bells and whistles that make navigating the codebase and customizing it a chore.
@@ -40,8 +38,6 @@ This project entered my life during a time for me that was filled with uncertain
 
 The project holds an incredibly dear place in my heart. Although it might not seem extraordinary or impressive to most people, to me, it is the anchor that kept me hopeful when things were difficult.
 
----
-
 ## 🛠️ Make It Your Own
 
 Look, I get it. You want your site up and running without wrestling with the code and messing with it too much. Me too. That's why I built it, believe or not.
@@ -61,8 +57,6 @@ To make sure your site doesn't look weird, I suggest you stick to these aspect r
 
 Nonetheless, you can feel free to ignore my advice. Who am I to tell you what to do anyways.
 
----
-
 ## 💻 How to Test It
 
 Ready to see how your changes look? 
@@ -78,8 +72,6 @@ Ready to see how your changes look?
    ```
    *Your site should be up and live at `http://localhost:8000`. It hot-reloads, so every time you save a file, the browser updates instantly.*
 
----
-
 ## 🚀 How to Deploy
 
 First and foremost, make sure you follow the [enable GitHub pages](https://docs.github.com/en/pages/quickstart) for your repo beforehand. Read every single little letter, don't you dare skip any parts 😠.
@@ -91,8 +83,6 @@ First, just make sure the `siteUrl` field in `gatsby-config.ts` points to your G
 npm run deploy
 ```
 *That's it. The script builds the site and pushes it straight to your `gh-pages` branch.*
-
----
 
 ## 🗺️ Where We're Going (Roadmap)
 
