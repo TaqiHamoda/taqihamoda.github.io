@@ -19,7 +19,6 @@ export default function getAllPublications() {
                     authors
                     bibtex
                     doi
-                    journal
                     pdf {
                         publicURL
                     }
@@ -66,7 +65,7 @@ export default function getAllPublications() {
         publications.push({
             title: publication.title,
             published: publication.published,
-            journal: publication.journal,
+            publisher: publication.publisher,
             doi: publication.doi,
             authors: pub_authors,
             abstract: abstracts[publication.doi].abstract,

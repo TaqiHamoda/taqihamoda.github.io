@@ -88,7 +88,7 @@ const PublicationCard = ({ publication, ...props }: PublicationCardProps) => {
                                 {authors}
                             </Text>
                             <Text>
-                                <i>{publication.journal}</i>{comma} <i>{publication.doi}</i>{comma} {publishedMonth}{' '}
+                                <i>{publication.publisher}</i>{comma} <i>{publication.doi}</i>{comma} {publishedMonth}{' '}
                                 {publishedYear}
                             </Text>
 

@@ -5,7 +5,7 @@ import ImgType from "./ImgType";
 export default interface Publication {
     title: string;
     published: string;
-    journal: string;
+    publisher: string;
     doi: string;
     authors: Author[];
     abstract: string;

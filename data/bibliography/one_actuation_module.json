@@ -5,11 +5,6 @@
         ["ar", "الروبوتات المستمرة المتاحة – وحدة تشغيل واحدة لإنشائهم جميعًا"]
     ],
     "publisher": [
-        ["en", "Frontiers"],
-        ["es", "Frontiers"],
-        ["ar", "فرنتيرز"]
-    ],
-    "journal": [
         ["en", "Frontiers in Robotics and AI"],
         ["es", "Frontiers en robótica e inteligencia artificial"],
         ["ar", "فرنتيرز للروبوتات والذكاء الاصطناعي"]
@@ -22,7 +17,7 @@
     "authors": ["RGrassman", "CShentu", "@me", "PTD", "JBK"],
     "published": "2024-01-19",
     "doi": "10.3389/frobt.2024.1272403",
-    "pdf": "../../assets/pdf/Open Continuum Robotics – One Actuation Module to Create them All.pdf",
+    "pdf": "../../assets/pdf/Open Continuum Robotics.pdf",
     "preview": "../../assets/images/publications/one-actuation-module.gif",
     "links": [
         {
