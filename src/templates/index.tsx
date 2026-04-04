@@ -48,7 +48,7 @@ const IndexTemplate = ({ data, children, pageContext }: IndexTemplateProps) => {
         <Page isIndex>
             {/* Profile Section */}
             <Box width='full' marginBottom={2}>
-                <Text as='h1' fontSize='4xl'><Text as='b'>{t('firstname')}</Text> {t('surname')}</Text>
+                <Text as='h1' fontSize='4xl'><Text as='b'>{pageContext.frontmatter.firstname}</Text> {pageContext.frontmatter.surname}</Text>
                 <Text>{pageContext.frontmatter.profession}</Text>
             </Box>
 

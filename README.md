@@ -30,7 +30,7 @@ However, once you look past the UI and move into the codebase, you will find whe
 
 * **Less Bloat 🤢**: I am extremely averse to third-party libraries and dependency bloat. Outside of the main frameworks (i.e. React, Chakra UI, Gatsby, i18n, MDX.js), you will find that all the functionality present is implemented from scratch instead of being outsourced. This keeps the project lean, secure, and easy to grow and maintain.
 
-* **Universal by Design 😶**: It might be hard to believe, but the vast majority of people live in a country where English is not the primary language spoken (I know, I know, crazy stuff). As such, it was a must for the engine to not only support internationalization but to actively promote it in its internal design and usage. After all, if this website is to feel like home, it shouldn't just look cozy, it should also sound familiar.
+* **Universal by Design 😶**: It might be hard to believe, but the vast majority of people live in a country where English is not the primary language spoken (I know, I know, crazy stuff). As such, it was a must for the engine to not only support internationalization but to actively promote it in its internal design and usage. After all, if this website is going to feel like home, it shouldn't just look cozy, it should also sound familiar.
 
 ### ❤️ A Personal Note
 
