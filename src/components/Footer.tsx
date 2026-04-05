@@ -53,7 +53,7 @@ const Footer = ({ ...props }: FooterProps) => {
 
             <Flex gap={3} width='100%' justifyContent='center'>
                 <Text color='gray.500' fontSize='xs'>
-                    &copy; {updateYear} {t('firstname') as string} {t('surname') as string}
+                    &copy; {updateYear}
                 </Text>
 
                 <Text color='gray.500' fontSize='xs'>
