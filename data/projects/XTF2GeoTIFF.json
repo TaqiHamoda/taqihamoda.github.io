@@ -1,0 +1,15 @@
+{
+    "name": [
+        ["en", "XTF2GeoTIFF"],
+        ["es", "XTF a GeoTIFF"],
+        ["ar", "XTF إلى GeoTIFF"]
+    ],
+    "year": 2026,
+    "description": [
+        ["en", "Generate GeoTIFF files from XTF side-scan sonar data for geospatial analysis and mapping."],
+        ["es", "Generar archivos GeoTIFF a partir de datos de sonar de barrido lateral XTF para análisis geoespacial y mapeo."],
+        ["ar", "إنشاء ملفات GeoTIFF من بيانات السونار الجانبي XTF للتحليل الجغرافي والمخططات."]
+    ],
+    "image": "../../assets/images/projects/XTF2GeoTIFF.jpg",
+    "link": "https://github.com/CIRS-Girona/XTF2GeoTIFF"
+}
