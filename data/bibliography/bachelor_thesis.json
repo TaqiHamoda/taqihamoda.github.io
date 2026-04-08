@@ -10,9 +10,9 @@
         ["ar", "زينودو"]
     ],
     "keywords": [
-        ["en", "bachelor thesis", "concentric tube robots", "CTCR", "forward kinematics", "cosserat rod", "numerical optimization", "snapping behavior"],
-        ["es", "trabajo de fin de grado", "robots de tubos concéntricos", "CTCR", "cinemática directa", "rod de cosserat", "optimización numérica", "comportamiento de snapping"],
-        ["ar", "رسالة البكالوريوس", "روبوتات الأنابيب المتحدة المركز", "CTCR", "الحركيات الأمامية", "قضيب كوسيرات", "تحسين عددي", "سلوك الانفلات"]
+        ["en", "bachelor thesis", "concentric tube robots", "CTCR", "forward kinematics", "cosserat rod", "numerical optimization"],
+        ["es", "trabajo de fin de grado", "robots de tubos concéntricos", "CTCR", "cinemática directa", "rod de cosserat", "optimización numérica"],
+        ["ar", "رسالة البكالوريوس", "روبوتات الأنابيب المتحدة المركز", "CTCR", "الحركيات الأمامية", "قضيب كوسيرات", "تحسين عددي"]
     ],
     "authors": ["@me"],
     "published": "2025-10-10",
@@ -29,5 +29,5 @@
             "link": "https://github.com/TaqiHamoda/Bachelor-Thesis"
         }
     ],
-    "bibtex": "@MISC{10.5281/zenodo.19283167,\n\tAUTHOR={Hamoda, Taqi},\n\tTITLE={From Milliseconds to Microseconds: Optimizing the Static Forward Kinematics of CTCRs},\n\tPUBLISHER={Zenodo},\n\tYEAR={2025},\n\tURL={https://github.com/TaqiHamoda/Bachelor-Thesis}\n\tDOI={10.5281/zenodo.19283167}\n}"
+    "bibtex": "@MISC{10.5281/zenodo.19283167,\n\tAUTHOR={Hamoda, Taqi},\n\tTITLE={From Milliseconds to Microseconds: Optimizing the Static Forward Kinematics of CTCRs},\n\tPUBLISHER={Zenodo},\n\tYEAR={2025},\n\tURL={https://github.com/TaqiHamoda/Bachelor-Thesis},\n\tDOI={10.5281/zenodo.19283167}\n}"
 }
